@@ -32,8 +32,14 @@ avaria(sistema_de_confort_interior, fallada_motor_ventilador).
 avaria(sistema_de_confort_interior, fuga_gas_refrigerant).
 avaria(sistema_de_confort_interior, fallada_compressor).
 
-avaria(motot)
+avaria(motor, bugía_defectuosa).
+avaria(motor, bomba_aigua_defectuosa).
+
 % Possibles causes
+
+causa(cotxe_no_arranca, bateria_defectuosa).
+causa(cotxe_no_arranca, fallada_bobina_encendre).
+causa(cotxe_no_arranca, fusibles_cremats).
 
 
 
