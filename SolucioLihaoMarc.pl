@@ -57,10 +57,13 @@ causa(cotxe_no_enfria, fallada_motor_ventilador).
 causa(cotxe_fa_soroll, manegues_desgastades).
 causa(cotxe_fa_soroll, embragatge_desgastat).
 causa(cotxe_fa_soroll, bugía_defectuosa).
-causa(cotxe_fa_soroll, baix_nivell_oli_direccio).
-causa(cotxe_fa_soroll, baix_nivell_flux).
-causa(cotxe_fa_soroll, càrter_danyat).
-causa(cotxe_fa_soroll, fallada_sistema_hidraulic).
+causa(cotxe_fa_soroll, direccio, baix_nivell_oli).
+causa(cotxe_fa_soroll, transmissio, baix_nivell_flux).
+causa(cotxe_fa_soroll, motor, càrter_danyat).
+causa(cotxe_fa_soroll, direccio, fallada_sistema_hidraulic).
+causa(cotxe_fa_soroll, transmissio, fallada_sistema_hidraulic).
+
+causa(fars_no_funcionen, sistema_electric, fusibles_cremats).
 
 % Dialeg amb usuari
 start :-
