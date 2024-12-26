@@ -62,17 +62,18 @@ causa(cotxe_fa_soroll, transmissio, baix_nivell_flux).
 causa(cotxe_fa_soroll, transmissio, fallada_sistema_hidraulic).
 causa(cotxe_fa_soroll, motor, carter_danyat).
 
-
-
 causa(fars_no_funcionen, sistema_electric, fusibles_cremats).
+causa(fars_no_funcionen, sistema_electric, bateria_defectuosa).
+causa(fars_no_funcionen, sistema_electric, alternador_defectuos).
+
+
 
 % Dialeg amb usuari
 start :-
     write('Hola! Benvingut al programa de solucio de cotxes, refrigeradors i components de cuina'), nl,
     write("Quin es el teu nom?"), read(Nom)
-    write("D'acord, ", Nom, ", quin es el teu problema?"), nl,
-    write("Si us plau, escriu el problema en aquest format: 'observacio(Sistema, Subsistema, Avaria).'"), nl,
-    write("Per exemple: observacio(cotxe, direccio, manegues_desgastades)."), read(Observacio)
+    write("D'acord, ", Nom, ", introdueix el sistema: cotxe, refrigerador o cuina"), read(Sistema),
+    write("Si us plau, introdueix la teva observació"), read(Observacio)
 
 % Funcio per detectar la causa de la avaria
 
