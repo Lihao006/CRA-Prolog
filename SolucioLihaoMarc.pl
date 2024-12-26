@@ -66,6 +66,9 @@ causa(fars_no_funcionen, sistema_electric, fusibles_cremats).
 causa(fars_no_funcionen, sistema_electric, bateria_defectuosa).
 causa(fars_no_funcionen, sistema_electric, alternador_defectuos).
 
+% 
+observacio (Sistema, subsistema, avaria) :-
+    sub_atom(Observacio_del_usuari, _, _, _, Sistema),
 
 
 % Dialeg amb usuari
@@ -73,7 +76,7 @@ start :-
     write('Hola! Benvingut al programa de solucio de cotxes, refrigeradors i components de cuina'), nl,
     write("Quin es el teu nom?"), read(Nom)
     write("D'acord, ", Nom, ", introdueix el sistema: cotxe, refrigerador o cuina"), read(Sistema),
-    write("Si us plau, introdueix la teva observació"), read(Observacio)
+    write("Si us plau, introdueix la teva observació"), read(Observacio_del_usuari),
 
 % Funcio per detectar la causa de la avaria
 
