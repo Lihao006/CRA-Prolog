@@ -44,8 +44,5 @@ start :-
     write("Per exemple: observacio(cotxe, direccio, manegues_desgastades)."), read(Observacio)
 
 % Funcio per detectar la causa de la avaria
-detectar_avaria(Subsistema, Avaria) :-
-    subsistema(Sistema, Subsistema),
-    avaria(Subsistema, Avaria),
-    observacio(Sistema, Subsistema, Avaria).
+
 
