@@ -82,22 +82,26 @@ causa(no_frena, fre, discos_desgastats).
 causa(no_frena, fre, bomba_frens_defectuosa).
 causa(no_frena, fre, problema_abs).
 
-% 
-separar_cadena(Cadena, Llista) :-
-    atomic_list_concat(Llista, ' ', Cadena).
-    
-% Observacions
-observacio(Observacio) :-
-    sub_atom(Observacio_del_usuari, _, _, _, Observacio),
-    causa(Observacio, Subsistema, Avaria).
 
+
+% Convertir cadena de caràcters en llista per a les observacions
+separar_cadena(Problema, Llista) :-
+    split_string(Problema, "_", "", Llista).
 
 % Dialeg amb usuari
 start :-
     write('Hola! Benvingut al programa de solucio de cotxes, refrigeradors i components de cuina'), nl,
     write("Quin es el teu nom?"), read(Nom)
-    write("D'acord, , ~w, introdueix el sistema: cotxe, refrigerador o cuina.~n", [Nom]), read(Sistema),
+    format("D'acord, , ~w, introdueix el sistema: cotxe, refrigerador o cuina.~n", [Nom]), read(Sistema),
     write("Si us plau, introdueix la teva observació"), read(Observacio_del_usuari),
+    % 
+    separar_cadena(Observacio_del_usuari, Patrons),
+    % Trobar paraules claus
+    findall(Patro, (member(Patro, Patrons), sub_atom(Observacio_del_usuari, _, _, _, Patro)), Resultats),
+    ( Resultats = [] -> write("Ho sento, però no puc ajudar-te amb aquesta observació.");
+
+      
+      )
 
 % Funcio per detectar la causa de la avaria
 
