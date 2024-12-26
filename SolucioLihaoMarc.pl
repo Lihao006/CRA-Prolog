@@ -50,18 +50,20 @@ causa(cotxe_no_arranca, sistema_electric, fusibles_cremats).
 causa(cotxe_no_arranca, motor, bugía_defectuosa).
 causa(cotxe_no_arranca, motor, bomba_aigua_defectuosa).
 
-causa(cotxe_no_enfria, fuga_gas_refrigerant).
-causa(cotxe_no_enfria, fallada_compressor).
-causa(cotxe_no_enfria, fallada_motor_ventilador).
+causa(cotxe_no_enfria, sistema_de_confort_interior, fuga_gas_refrigerant).
+causa(cotxe_no_enfria, sistema_de_confort_interior, fallada_compressor).
+causa(cotxe_no_enfria, sistema_de_confort_interior, fallada_motor_ventilador).
 
-causa(cotxe_fa_soroll, manegues_desgastades).
-causa(cotxe_fa_soroll, embragatge_desgastat).
-causa(cotxe_fa_soroll, bugía_defectuosa).
+causa(cotxe_fa_soroll, direccio, manegues_desgastades).
 causa(cotxe_fa_soroll, direccio, baix_nivell_oli).
-causa(cotxe_fa_soroll, transmissio, baix_nivell_flux).
-causa(cotxe_fa_soroll, motor, càrter_danyat).
 causa(cotxe_fa_soroll, direccio, fallada_sistema_hidraulic).
+causa(cotxe_fa_soroll, transmissio, embragatge_desgastat).
+causa(cotxe_fa_soroll, transmissio, baix_nivell_flux).
 causa(cotxe_fa_soroll, transmissio, fallada_sistema_hidraulic).
+causa(cotxe_fa_soroll, motor, bugía_defectuosa).
+causa(cotxe_fa_soroll, motor, càrter_danyat).
+
+
 
 causa(fars_no_funcionen, sistema_electric, fusibles_cremats).
 
