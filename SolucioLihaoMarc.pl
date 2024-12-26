@@ -82,10 +82,10 @@ causa(no_frena, fre, discos_desgastats).
 causa(no_frena, fre, bomba_frens_defectuosa).
 causa(no_frena, fre, problema_abs).
 
-% 
-observacio(Sistema, Subsistema, Simptoma) :-
-    sub_atom(Observacio_del_usuari, _, _, _, ),
-    causa(_, Subsistema, Avaria).
+% Observacions
+observacio(Observacio) :-
+    sub_atom(Observacio_del_usuari, _, _, _, Observacio),
+    causa(Observacio, Subsistema, Avaria).
 
 
 % Dialeg amb usuari
