@@ -14,6 +14,8 @@ subsistema(cotxe, sistema_electric).
 subsistema(cotxe, sistema_de_confort_interior).
 subsistema(cotxe, motor).
 
+
+
 % Avaries cotxes
 avaria(direccio, manegues_desgastades).
 avaria(direccio, baix_nivell_oli_direccio).
@@ -39,12 +41,14 @@ avaria(motor, bugía_defectuosa).
 avaria(motor, bomba_aigua_defectuosa).
 avaria(motor, càrter_danyat).
 
+
+
 % Possibles causes de avaries
-causa(cotxe_no_arranca, bateria_defectuosa).
-causa(cotxe_no_arranca, fallada_bobina_encendre).
-causa(cotxe_no_arranca, fusibles_cremats).
-causa(cotxe_no_arranca, bugía_defectuosa).
-causa(cotxe_no_arranca, bomba_aigua_defectuosa).
+causa(cotxe_no_arranca, sistema_electric, bateria_defectuosa).
+causa(cotxe_no_arranca, sistema_electric, fallada_bobina_encendre).
+causa(cotxe_no_arranca, sistema_electric, fusibles_cremats).
+causa(cotxe_no_arranca, motor, bugía_defectuosa).
+causa(cotxe_no_arranca, motor, bomba_aigua_defectuosa).
 
 causa(cotxe_no_enfria, fuga_gas_refrigerant).
 causa(cotxe_no_enfria, fallada_compressor).
@@ -53,8 +57,10 @@ causa(cotxe_no_enfria, fallada_motor_ventilador).
 causa(cotxe_fa_soroll, manegues_desgastades).
 causa(cotxe_fa_soroll, embragatge_desgastat).
 causa(cotxe_fa_soroll, bugía_defectuosa).
-
-causa
+causa(cotxe_fa_soroll, baix_nivell_oli_direccio).
+causa(cotxe_fa_soroll, baix_nivell_flux).
+causa(cotxe_fa_soroll, càrter_danyat).
+causa(cotxe_fa_soroll, fallada_sistema_hidraulic).
 
 % Dialeg amb usuari
 start :-
