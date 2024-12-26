@@ -35,4 +35,4 @@ start :-
     write("Quin es el teu nom?"), read(Nom)
     write("D'acord, ", Nom, ", quin es el teu problema?"), nl,
     write("Si us plau, escriu el problema en aquest format: 'observacio(Sistema, Subsistema, Avaria).'"), nl,
-    write("Per exemple: observacio(cotxe, direccio, manegues_desgastades)."), nl,
+    write("Per exemple: observacio(cotxe, direccio, manegues_desgastades)."), read(Observacio)
