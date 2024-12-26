@@ -3,6 +3,9 @@
 % Avaries cotxes:
 % https://helloauto.com/es-es/glosario/
 
+% Raonament abductiu:
+% https://book.simply-logical.space/src/text/3_part_iii/8.3.html
+
 
 subsistema(cotxe, direccio).
 subsistema(cotxe, transmissio).
