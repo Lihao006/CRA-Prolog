@@ -40,14 +40,20 @@ avaria(motor, càrter_danyat).
 causa(cotxe_no_arranca, bateria_defectuosa).
 causa(cotxe_no_arranca, fallada_bobina_encendre).
 causa(cotxe_no_arranca, fusibles_cremats).
+causa(cotxe_no_arranca, bugía_defectuosa).
+causa(cotxe_no_arranca, bomba_aigua_defectuosa).
 
 causa(cotxe_no_enfria, fuga_gas_refrigerant).
 causa(cotxe_no_enfria, fallada_compressor).
 causa(cotxe_no_enfria, fallada_motor_ventilador).
 
+causa(cotxe_fa_soroll, manegues_desgastades).
+causa(cotxe_fa_soroll, embragatge_desgastat).
+causa(cotxe_fa_soroll, bugía_defectuosa).
 
+causa
 
-% Dialeg amb l usuari
+% Dialeg amb usuari
 start :-
     write('Hola! Benvingut al programa de solucio de cotxes, refrigeradors i components de cuina'), nl,
     write("Quin es el teu nom?"), read(Nom)
