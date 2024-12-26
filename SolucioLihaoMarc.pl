@@ -88,6 +88,11 @@ causa(no_frena, fre, problema_abs).
 separar_cadena(Problema, Llista) :-
     split_string(Problema, "_", "", Llista).
 
+% Funcio per detectar la causa de la avaria
+detectar_causa(Resultats, Subsistema, Avaria) :-
+    member(Subsistema, Resultats),
+    avaria(Subsistema, Avaria).
+
 % Dialeg amb usuari
 start :-
     write('Hola! Benvingut al programa de solucio de cotxes, refrigeradors i components de cuina'), nl,
@@ -95,7 +100,7 @@ start :-
     format("D'acord, , ~w, introdueix el sistema: cotxe, refrigerador o cuina.~n", [Nom]), read(Sistema),
     write("Si us plau, introdueix la teva observació"), read(Observacio_del_usuari),
     % 
-    separar_cadena(Observacio_del_usuari, Patrons),
+    separar_cadena('no_frena', Patrons),
     % Trobar paraules claus
     findall(Patro, (member(Patro, Patrons), sub_atom(Observacio_del_usuari, _, _, _, Patro)), Resultats),
     ( Resultats = [] -> write("Ho sento, però no puc ajudar-te amb aquesta observació.");
