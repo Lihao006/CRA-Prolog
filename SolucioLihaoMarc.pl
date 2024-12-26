@@ -34,6 +34,7 @@ avaria(sistema_de_confort_interior, fallada_compressor).
 
 avaria(motor, bugía_defectuosa).
 avaria(motor, bomba_aigua_defectuosa).
+avaria(motor, càrter_danyat).
 
 % Possibles causes
 
