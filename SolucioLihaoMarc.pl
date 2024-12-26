@@ -2,7 +2,9 @@
 
 % Avaries cotxes:
 % https://helloauto.com/es-es/glosario/
-% Llibre Simply Logical de Peter Flach i Kacper Sokol (secció 8.3)
+
+% Raonament abductiu:
+% https://book.simply-logical.space/src/text/3_part_iii/8.3.html
 
 
 subsistema(cotxe, direccio).
