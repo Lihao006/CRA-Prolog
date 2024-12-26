@@ -85,17 +85,18 @@ causa(no_frena, fre, problema_abs).
 
 
 % Convertir cadena de caràcters en llista per a les observacions
-separar_cadena(Problema, Llista) :-
-    split_string(Problema, "_", "", Llista).
+separar_cadena(Observacio, Llista) :-
+    split_string(Observacio, "_", "", Llista).
 
 % Funcio per detectar la causa de la avaria
 detectar_causa(Resultats, Subsistema, Avaria) :-
     member(Subsistema, Resultats),
-    avaria(Subsistema, Avaria).
+    causa(Observacio, Subsistema, Avaria).
 
 % Dialeg amb usuari
 start :-
-    write('Hola! Benvingut al programa de solucio de cotxes, refrigeradors i components de cuina'), nl,
+    write('Hola! Benvingut/da al programa de solucio de cotxes, refrigeradors i components de cuina'), nl,
+    write("Si us plau, no escriguis accents ni caràcters especials, inlcoent majúscules, per evitar errors ;)"), nl,
     write("Quin es el teu nom?"), read(Nom)
     format("D'acord, , ~w, introdueix el sistema: cotxe, refrigerador o cuina.~n", [Nom]), read(Sistema),
     write("Si us plau, introdueix la teva observació"), read(Observacio_del_usuari),
@@ -104,7 +105,8 @@ start :-
     % Trobar paraules claus
     findall(Patro, (member(Patro, Patrons), sub_atom(Observacio_del_usuari, _, _, _, Patro)), Resultats),
     ( Resultats = [] -> write("Ho sento, però no puc ajudar-te amb aquesta observació.");
-
+    format("S'han trobar les paraules claus següents: ~w", [Resultats]),
+    format("Es refereix a ~w ?", [causa(Observacio, Subsistema, Avaria)]),
       
       )
 
