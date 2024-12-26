@@ -2,8 +2,6 @@
 % https://helloauto.com/es-es/glosario/
 
 
-
-
 subsistema(cotxe, direccio).
 subsistema(cotxe, transmissio).
 subsistema(cotxe, encesa).
@@ -30,3 +28,11 @@ avaria(sistema_electric, fusibles_cremats).
 avaria(sistema_de_confort_interior, fallada_motor_ventilador).
 avaria(sistema_de_confort_interior, fuga_gas_refrigerant).
 avaria(sistema_de_confort_interior, fallada_compressor).
+
+% Dialeg amb l usuari
+start :-
+    write('Hola! Benvingut al programa de solucio de cotxes, refrigeradors i components de cuina'), nl,
+    write("Quin es el teu nom?"), read(Nom)
+    write("D'acord, ", Nom, ", quin es el teu problema?"), nl,
+    write("Si us plau, escriu el problema en aquest format: 'observacio(Sistema, Subsistema, Avaria).'"), nl,
+    write("Per exemple: observacio(cotxe, direccio, manegues_desgastades)."), nl,
