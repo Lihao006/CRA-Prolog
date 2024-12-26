@@ -6,6 +6,8 @@
 % Raonament abductiu:
 % https://book.simply-logical.space/src/text/3_part_iii/8.3.html
 
+% Comandes de Prolog:
+% https://es.scribd.com/document/373662386/Comandos-Prolog
 
 subsistema(cotxe, direccio).
 subsistema(cotxe, transmissio).
@@ -75,7 +77,7 @@ observacio (Sistema, subsistema, avaria) :-
 start :-
     write('Hola! Benvingut al programa de solucio de cotxes, refrigeradors i components de cuina'), nl,
     write("Quin es el teu nom?"), read(Nom)
-    write("D'acord, ", Nom, ", introdueix el sistema: cotxe, refrigerador o cuina"), read(Sistema),
+    write("D'acord, ", ~w, ", introdueix el sistema: cotxe, refrigerador o cuina", [Nom]), read(Sistema),
     write("Si us plau, introdueix la teva observació"), read(Observacio_del_usuari),
 
 % Funcio per detectar la causa de la avaria
