@@ -1,4 +1,6 @@
 % Bibliografia:
+
+% Avaries cotxes:
 % https://helloauto.com/es-es/glosario/
 % Llibre Simply Logical de Peter Flach i Kacper Sokol (secció 8.3)
 
@@ -31,8 +33,18 @@ avaria(sistema_de_confort_interior, fallada_motor_ventilador).
 avaria(sistema_de_confort_interior, fuga_gas_refrigerant).
 avaria(sistema_de_confort_interior, fallada_compressor).
 
-avaria(motot)
-% Possibles causes
+avaria(motor, bugía_defectuosa).
+avaria(motor, bomba_aigua_defectuosa).
+avaria(motor, càrter_danyat).
+
+% Possibles causes de avaries
+causa(cotxe_no_arranca, bateria_defectuosa).
+causa(cotxe_no_arranca, fallada_bobina_encendre).
+causa(cotxe_no_arranca, fusibles_cremats).
+
+causa(cotxe_no_enfria, fuga_gas_refrigerant).
+causa(cotxe_no_enfria, fallada_compressor).
+causa(cotxe_no_enfria, fallada_motor_ventilador).
 
 
 
