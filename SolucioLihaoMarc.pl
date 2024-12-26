@@ -7,6 +7,7 @@ subsistema(cotxe, transmissio).
 subsistema(cotxe, encesa).
 subsistema(cotxe, sistema_electric).
 subsistema(cotxe, sistema_de_confort_interior).
+subsistema(cotxe, motor).
 
 % Avaries cotxes
 avaria(direccio, manegues_desgastades).
@@ -29,6 +30,11 @@ avaria(sistema_de_confort_interior, fallada_motor_ventilador).
 avaria(sistema_de_confort_interior, fuga_gas_refrigerant).
 avaria(sistema_de_confort_interior, fallada_compressor).
 
+avaria(motot)
+% Possibles causes
+
+
+
 % Dialeg amb l usuari
 start :-
     write('Hola! Benvingut al programa de solucio de cotxes, refrigeradors i components de cuina'), nl,
@@ -36,3 +42,10 @@ start :-
     write("D'acord, ", Nom, ", quin es el teu problema?"), nl,
     write("Si us plau, escriu el problema en aquest format: 'observacio(Sistema, Subsistema, Avaria).'"), nl,
     write("Per exemple: observacio(cotxe, direccio, manegues_desgastades)."), read(Observacio)
+
+% Funcio per detectar la causa de la avaria
+detectar_avaria(Subsistema, Avaria) :-
+    subsistema(Sistema, Subsistema),
+    avaria(Subsistema, Avaria),
+    observacio(Sistema, Subsistema, Avaria).
+
