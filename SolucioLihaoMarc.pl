@@ -9,6 +9,10 @@
 % Comandes de Prolog:
 % https://es.scribd.com/document/373662386/Comandos-Prolog
 
+sistema(cotxe).
+sistema(refrigerador).
+sistema(cuina).
+
 subsistema(cotxe, direccio).
 subsistema(cotxe, transmissio).
 subsistema(cotxe, encesa).
@@ -45,7 +49,7 @@ avaria(motor, carter_danyat).
 
 
 
-% Possibles causes de avaries
+% Possibles causes de avaries en cotxes
 causa(cotxe_no_arranca, sistema_electric, bateria_defectuosa).
 causa(cotxe_no_arranca, sistema_electric, fallada_bobina_encendre).
 causa(cotxe_no_arranca, sistema_electric, fusibles_cremats).
@@ -69,15 +73,16 @@ causa(fars_no_funcionen, sistema_electric, bateria_defectuosa).
 causa(fars_no_funcionen, sistema_electric, alternador_defectuos).
 
 % 
-observacio (Sistema, subsistema, avaria) :-
-    sub_atom(Observacio_del_usuari, _, _, _, Sistema),
+observacio(Sistema, Subsistema, Simptoma) :-
+    sub_atom(Observacio_del_usuari, _, _, _, ),
+    causa(_, Subsistema, Avaria).
 
 
 % Dialeg amb usuari
 start :-
     write('Hola! Benvingut al programa de solucio de cotxes, refrigeradors i components de cuina'), nl,
     write("Quin es el teu nom?"), read(Nom)
-    write("D'acord, ", ~w, ", introdueix el sistema: cotxe, refrigerador o cuina", [Nom]), read(Sistema),
+    write("D'acord, , ~w, introdueix el sistema: cotxe, refrigerador o cuina.~n", [Nom]), read(Sistema),
     write("Si us plau, introdueix la teva observació"), read(Observacio_del_usuari),
 
 % Funcio per detectar la causa de la avaria
