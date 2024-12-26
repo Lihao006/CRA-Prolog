@@ -47,6 +47,11 @@ avaria(motor, bugía_defectuosa).
 avaria(motor, bomba_aigua_defectuosa).
 avaria(motor, carter_danyat).
 
+avaria(fre, pastilles_desgastades).
+avaria(fre, discos_desgastats).
+avaria(fre, bomba_frens_defectuosa).
+avaria(fre, problema_abs).
+
 
 
 % Possibles causes de avaries en cotxes
@@ -71,6 +76,11 @@ causa(cotxe_fa_soroll, motor, carter_danyat).
 causa(fars_no_funcionen, sistema_electric, fusibles_cremats).
 causa(fars_no_funcionen, sistema_electric, bateria_defectuosa).
 causa(fars_no_funcionen, sistema_electric, alternador_defectuos).
+
+causa(no_frena, fre, pastilles_desgastades).
+causa(no_frena, fre, discos_desgastats).
+causa(no_frena, fre, bomba_frens_defectuosa).
+causa(no_frena, fre, problema_abs).
 
 % 
 observacio(Sistema, Subsistema, Simptoma) :-
