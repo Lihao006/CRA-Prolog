@@ -39,7 +39,7 @@ avaria(sistema_de_confort_interior, fallada_compressor).
 
 avaria(motor, bugía_defectuosa).
 avaria(motor, bomba_aigua_defectuosa).
-avaria(motor, càrter_danyat).
+avaria(motor, carter_danyat).
 
 
 
@@ -60,8 +60,7 @@ causa(cotxe_fa_soroll, direccio, fallada_sistema_hidraulic).
 causa(cotxe_fa_soroll, transmissio, embragatge_desgastat).
 causa(cotxe_fa_soroll, transmissio, baix_nivell_flux).
 causa(cotxe_fa_soroll, transmissio, fallada_sistema_hidraulic).
-causa(cotxe_fa_soroll, motor, bugía_defectuosa).
-causa(cotxe_fa_soroll, motor, càrter_danyat).
+causa(cotxe_fa_soroll, motor, carter_danyat).
 
 
 
