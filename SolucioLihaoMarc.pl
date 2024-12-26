@@ -82,6 +82,10 @@ causa(no_frena, fre, discos_desgastats).
 causa(no_frena, fre, bomba_frens_defectuosa).
 causa(no_frena, fre, problema_abs).
 
+% 
+separar_cadena(Cadena, Llista) :-
+    atomic_list_concat(Llista, ' ', Cadena).
+    
 % Observacions
 observacio(Observacio) :-
     sub_atom(Observacio_del_usuari, _, _, _, Observacio),
