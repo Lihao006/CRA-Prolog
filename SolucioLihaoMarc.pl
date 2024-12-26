@@ -29,4 +29,4 @@ avaria(sistema_electric, fusibles_cremats).
 
 avaria(sistema_de_confort_interior, fallada_motor_ventilador).
 avaria(sistema_de_confort_interior, fuga_gas_refrigerant).
-ava
+avaria(sistema_de_confort_interior, fallada_compressor).
