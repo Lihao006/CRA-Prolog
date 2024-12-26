@@ -1,5 +1,6 @@
 % Bibliografia:
 % https://helloauto.com/es-es/glosario/
+% Llibre Simply Logical de Peter Flach i Kacper Sokol (secció 8.3)
 
 
 subsistema(cotxe, direccio).
