@@ -86,86 +86,22 @@ avaria(aigua, [fuites_aigua, no_hi_ha_aigua], canonada_danyada).
 avaria(gas, [fuites_gas], canonada_gas_danyada).
 avaria(gas, [no_gas], regulador_gas_danyat).
 
-% Llista de simptomes de cotxe
-simptomes_cotxe([cotxe_no_arranca, cotxe_no_enfria, no_es_mou, fars_no_funcionen, no_frena]).
-% Llista de simptomes de refrigerador
-simptomes_refrigerador([no_refreda, soroll_fort, baixa_eficiencia, fuites_de_gas, gel_al_evaporador, massa_fred, llum_no_funciona]).
-% Llista de simptomes de cuina
-simptomes_cuina([fuites_gas, fuites_aigua, no_gas, calor, soroll_fort, no_ventila, no_hi_ha_aigua, no_encen_foc]).
-
-% Dialeg amb usuari
-% Introducció
-start :-
-    write('Hola! Benvingut/da al programa de solucio de cotxes, refrigeradors i components de cuina'), nl,
-    write("Si us plau, no escriguis accents ni caràcters especials, inlcoent majúscules, per evitar errors ;)"), nl,
-    write("Quin es el teu nom?"), 
-    read(Nom),
-    format("D'acord, , ~w, introdueix el sistema: cotxe, refrigerador o cuina.~n", [Nom]), 
-    read(Sistema),
-    (Sistema == cotxe -> diagnostica_cotxe;
-    Sistema == refrigerador -> diagnostica_refrigerador;
-    Sistema == cuina -> diagnostica_cuina;
-    write("Aquest sistema encara no esta implementat. Torna-ho a provar."), nl,
-    start
-    ).
-
-% Part de diagnostic de refrigeradors
-diagnostica_refrigerador :-
-    write("Introdueix el simptoma detectat (no_refreda, soroll_fort, baixa_eficiencia, fuites_de_gas, gel_al_evaporador, massa_fred, llum_no_funciona) o 'sortir' per tornar al principi: "), nl,
-    read(Simptoma),
-    ( Simptoma == sortir -> 
-        start;
-      troba_causa(Simptoma, Causes),
-      format("Les possibles causes de ~w són:", [Simptoma]), nl,
-      printllista(Causes),
-      mes_obs(Causes, NovesCauses),
-      pregunta_usuari(NovesCauses),
-      diagnostica_refrigerador
-    ).
 
 
-% Part de diagnostic de cotxes
-diagnostica_cotxe :-
-    write("Introdueix el simptoma detectat (cotxe_no_arranca, cotxe_no_enfria, no_es_mou, fars_no_funcionen, no_frena) o 'sortir' per tornar al principi: "), nl,
-    read(Simptoma),
-    ( Simptoma == sortir ->
-        start;
-      troba_causa(Simptoma, Causes),
-      format("Les possibles causes de ~w són:", [Simptoma]), nl,
-      printllista(Causes),
-      mes_obs(Causes, NovesCauses),
-      pregunta_usuari(NovesCauses),
-      diagnostica_cotxe
-    ).
-
-
-% Part de diagnostic de cuines
-diagnostica_cuina :-
-    write("Introdueix el simptoma detectat (fuites_gas, fuites_aigua, no_gas, calor, soroll_fort, no_ventila, no_hi_ha_aigua, no_encen_foc) o 'sortir' per tornar al principi: "), nl,
-    read(Simptoma),
-    ( Simptoma == sortir ->
-        start;
-      troba_causa(Simptoma, Causes),
-      format("Les possibles causes de ~w són:", [Simptoma]), nl,
-      printllista(Causes),
-      mes_obs(Causes, NovesCauses),
-      pregunta_usuari(NovesCauses),
-      diagnostica_cuina
-    ).
 
 % Funcio per demanar mes observacions per reduir causes possibles
 mes_obs(Causes, NovesCauses) :-
     write("Vols introduir mes observacions? (si/no)"), nl,
     read(Resposta1),
     ( Resposta1 == no -> 
-        NovesCauses = Causes, start;
+        NovesCauses = Causes;
       Resposta1 == si -> 
       write("Si us plau, escriu el nou simptoma:"), nl,
-      write("NO INTRODUEIXIS EL MATEIX SIMPTOMA DE NOU."), nl,
+      write("NO INTRODUEIXI EL MATEIX SIMPTOMA DE NOU."), nl,
       read(NouSimptoma),
       include(te_aquest_simptoma(NouSimptoma), Causes, NovesCausesSegonsNouSimptoma),
       printllista(NovesCausesSegonsNouSimptoma),
-      mes_obs(NovesCausesSegonsNouSimptoma, NovesCauses).
+      mes_obs(NovesCausesSegonsNouSimptoma, NovesCauses)
     ).
 
 % Funcio per buscar coincidencies entre el NouSimptoma i la llista Simptomes de cada avaria(...)
@@ -185,9 +121,9 @@ printllista([(Subsistema, Causa, _)|Altres]) :-
     printllista(Altres).
 
 % Funció per preguntar a usuari si les causes filtrades que queden son correctes
-% Suposem que l usuari va a comprovar si els subsistemes estan correctes o no
+% Suposem que l usuari va a comprovar si els components dels subsistemes esmentades estan correctes o no
 pregunta_usuari([]).
-pregunta_usuari([(Subsistema, Causa, Simptomes)|Altres]) :-
+pregunta_usuari([(Subsistema, Causa, _)|Altres]) :-
     format("Podria ser ~w en el subsistema ~w? (si/no): ", [Causa, Subsistema]), nl,
     read(Resposta),
     ( Resposta == si ->
@@ -195,3 +131,64 @@ pregunta_usuari([(Subsistema, Causa, Simptomes)|Altres]) :-
       Resposta == no ->
         pregunta_usuari(Altres)
     ).
+
+% Dialeg amb usuari
+% Introducció
+start :-
+    write('Hola! Benvingut/da al programa de solucio de cotxes, refrigeradors i components de cuina'), nl,
+    write("Si us plau, no escriguis accents ni caràcters especials, inlcoent majúscules, per evitar errors ;)"), nl,
+    write("Quin es el teu nom?"), 
+    read(Nom),
+    format("D'acord, , ~w, introdueix el sistema: cotxe, refrigerador o cuina.~n", [Nom]), 
+    read(Sistema),
+    (Sistema == cotxe -> diagnostica_cotxe;
+    Sistema == refrigerador -> diagnostica_refrigerador;
+    Sistema == cuina -> diagnostica_cuina;
+    write("Aquest sistema encara no esta implementat. Torna-ho a provar."), nl,
+    start
+    ).
+
+
+% Part de diagnostic de refrigeradors
+diagnostica_refrigerador :-
+  write("Introdueix el simptoma detectat (no_refreda, soroll_fort, baixa_eficiencia, fuites_de_gas, gel_al_evaporador, massa_fred, llum_no_funciona) o 'sortir' per tornar al principi: "), nl,
+  read(Simptoma),
+  ( Simptoma == sortir -> 
+      start;
+    troba_causa(Simptoma, Causes),
+    format("Les possibles causes de ~w són:~n", [Simptoma]),
+    printllista(Causes),
+    mes_obs(Causes, NovesCauses),
+    pregunta_usuari(NovesCauses),
+    diagnostica_refrigerador
+  ).
+
+
+% Part de diagnostic de cotxes
+diagnostica_cotxe :-
+  write("Introdueix el simptoma detectat (cotxe_no_arranca, cotxe_no_enfria, no_es_mou, fars_no_funcionen, no_frena) o 'sortir' per tornar al principi: "), nl,
+  read(Simptoma),
+  ( Simptoma == sortir ->
+      start;
+    troba_causa(Simptoma, Causes),
+    format("Les possibles causes de ~w són:~n", [Simptoma]),
+    printllista(Causes),
+    mes_obs(Causes, NovesCauses),
+    pregunta_usuari(NovesCauses),
+    diagnostica_cotxe
+  ).
+
+
+% Part de diagnòstic de cuines
+diagnostica_cuina :-
+  write("Introdueix el simptoma detectat (fuites_gas, fuites_aigua, no_gas, calor, soroll_fort, no_ventila, no_hi_ha_aigua, no_encen_foc) o 'sortir' per tornar al principi: "), nl,
+  read(Simptoma),
+  ( Simptoma == sortir ->
+      start;
+    troba_causa(Simptoma, Causes),
+    format("Les possibles causes per a ~w són:~n", [Simptoma]),
+    printllista(Causes),
+    mes_obs(Causes, NovesCauses),
+    pregunta_usuari(NovesCauses),
+    diagnostica_cuina
+  ).
