@@ -41,7 +41,7 @@ avaria(fre, [no_frena], discos_desgastats).
 avaria(fre, [no_frena], bomba_frens_defectuosa).
 avaria(fre, [no_frena], problema_abs).
 
-
+% Dialeg amb usuari
 diagnostica :-
     write("Introdueix el simptoma detectat (cotxe_no_arranca, cotxe_no_enfria, cotxe_fa_soroll, fars_no_funcionen, no_frena) o 'sortir' per acabar: "), nl,
     read(Simptoma),
@@ -51,8 +51,14 @@ diagnostica :-
       diagnostica
     ).
 
+% Funcio per trobar la causa del problema
 troba_causa(Simptoma) :-
-    avaria(Problema, Simptomes, Causa),
-    member(Simptoma, Simptomes),
-    write("Possible problema: "), write(Problema), nl,
-    write("Explicacio: "), write(Causa), nl.
+    findall((Subsistema, Causa), avaria(Subsistema, Simptomes, Causa), Causes),
+    format("Les possibles causes son de ~w són:", [Simptoma]), nl,
+    printllista(Causes).
+
+% Funcio per convertir la llista Causes en un seguit de frases.
+printllista([]).
+printllista([(Subsistema, Causa)|Altres]) :-
+    format("Subsistema: ~w, possible avaria: ~w~n", [Subsistema, Causa]),
+    printllista(Altres).
