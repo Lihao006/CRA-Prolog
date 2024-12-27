@@ -86,14 +86,6 @@ avaria(aigua, [fuites_aigua, no_hi_ha_aigua], canonada_danyada).
 avaria(gas, [fuites_gas], canonada_gas_danyada).
 avaria(gas, [no_gas], regulador_gas_danyat).
 
-% Llista de simptomes de cotxe
-Simptomes_cotxe = [cotxe_no_arranca, cotxe_no_enfria, no_es_mou, fars_no_funcionen, no_frena].
-
-% Llista de simptomes de refrigerador
-Simptomes_refrigerador = [no_refreda, soroll_fort, baixa_eficiencia, fuites_de_gas, gel_al_evaporador, massa_fred, llum_no_funciona].
-
-% Llista de simptomes de cuina
-Simptomes_cuina = [fuites_gas, fuites_aigua, no_gas, calor, soroll_fort, no_ventila, no_hi_ha_aigua].
 
 
 % Dialeg amb usuari
@@ -118,11 +110,14 @@ diagnostica_refrigerador :-
     read(Simptoma),
     ( Simptoma == sortir -> 
         start;
-      troba_causa(Simptoma),
+      troba_causa(Simptoma, Causes),
+      format("Les possibles causes son de ~w són:", [Simptoma]), nl,
+      printllista(Causes),
       write(" "), nl,
       write("Aqui tens de nou la llista de simptomes del refrigerador:"), nl,
-      write("no_refreda, soroll_fort, baixa_eficiencia, fuites_de_gas, gel_al_evaporador, massa_fred, llum_no_funciona")
-      mes_obs(Causes, NovesCauses)
+      write("no_refreda, soroll_fort, baixa_eficiencia, fuites_de_gas, gel_al_evaporador, massa_fred, llum_no_funciona"),
+      mes_obs(Causes, NovesCauses),
+      diagnostica_refrigerador
     ).
 
 
@@ -132,11 +127,14 @@ diagnostica_cotxe :-
     read(Simptoma),
     ( Simptoma == sortir ->
         start;
-      troba_causa(Simptoma),
+      troba_causa(Simptoma, Causes),
+      format("Les possibles causes son de ~w són:", [Simptoma]), nl,
+      printllista(Causes),
       write(" "), nl,
       write("Aqui tens de nou la llista de simptomes del cotxe:"), nl,
-      write("cotxe_no_arranca, cotxe_no_enfria, no_es_mou, fars_no_funcionen, no_frena")
-      mes_obs(Causes, NovesCauses)
+      write("cotxe_no_arranca, cotxe_no_enfria, no_es_mou, fars_no_funcionen, no_frena"),
+      mes_obs(Causes, NovesCauses),
+      diagnostica_cotxe
     ).
 
 
@@ -146,25 +144,29 @@ diagnostica_cuina :-
     read(Simptoma),
     ( Simptoma == sortir ->
         start;
-      troba_causa(Simptoma),
+      troba_causa(Simptoma, Causes),
+      format("Les possibles causes son de ~w són:", [Simptoma]), nl,
+      printllista(Causes),
       write(" "), nl,
       write("Aqui tens de nou la llista de simptomes de la cuina:"), nl,
-      write("fuites_gas, fuites_aigua, no_gas, calor, soroll_fort, no_ventila, no_hi_ha_aigua")
-      mes_obs(Causes, NovesCauses)
+      write("fuites_gas, fuites_aigua, no_gas, calor, soroll_fort, no_ventila, no_hi_ha_aigua"),
+      mes_obs(Causes, NovesCauses),
+      diagnostica_cuina
     ).
 
 % Funcio per demanar mes observacions per reduir causes possibles
 mes_obs(Causes, NovesCauses) :-
-    write("Vols introduir mes observacions? (si/no)"),
+    write("Vols introduir mes observacions? (si/no)"), nl,
     read(Resposta1),
-    (Resposta1 == no -> 
-    NovesCauses = Causes, start;
-    Resposta1 == si -> 
-    write("Si us plau, escriu el nou simptoma:"),
-    write("NO INTRODUEIXI EL MATEIX SIMPTOMA DE NOU."),
-    read(NouSimptoma),
-    include(te_aquest_simptoma(NouSimptoma), Causes, NovesCausesSegonsNouSimptoma),
-    mes_obs(NovesCausesSegonsNouSimptoma, NovesCauses).
+    ( Resposta1 == no -> 
+        NovesCauses = Causes, start;
+      Resposta1 == si -> 
+      write("Si us plau, escriu el nou simptoma:"), nl,
+      write("NO INTRODUEIXI EL MATEIX SIMPTOMA DE NOU."), nl,
+      read(NouSimptoma),
+      include(te_aquest_simptoma(NouSimptoma), Causes, NovesCausesSegonsNouSimptoma),
+      printllista(NovesCausesSegonsNouSimptoma),
+      mes_obs(NovesCausesSegonsNouSimptoma, NovesCauses).
     ).
 
 % Funcio per buscar coincidencies entre el NouSimptoma i la llista Simptomes de cada avaria(...)
@@ -172,21 +174,13 @@ te_aquest_simptoma(NouSimptoma, (_, _, Simptomes)) :-
     member(NouSimptoma, Simptomes).
 
 % Funcio per trobar totes les causes possibles del problema
-troba_causa(Simptoma) :-
+troba_causa(Simptoma, Causes) :-
     % Aqui es busca en totes les avaria(...) coincidencies amb el Simptoma en la llista de Simptomes, 
     % anotem les dades Subsistema i Causa de les avaria(...) coindidents i es guarden en la llista Causes.
-    findall((Subsistema, Causa), (avaria(Subsistema, Simptomes, Causa), member(Simptoma, Simptomes)), Causes),
-    format("Les possibles causes son de ~w són:", [Simptoma]), nl,
-    printllista(Causes).
+    findall((Subsistema, Causa, Simptomes), (avaria(Subsistema, Simptomes, Causa), member(Simptoma, Simptomes)), Causes).
 
 % Funcio per convertir la llista Causes en un seguit de frases.
 printllista([]).
-printllista([(Subsistema, Causa)|Altres]) :-
+printllista([(Subsistema, Causa, _)|Altres]) :-
     format("Subsistema: ~w, possible avaria: ~w~n", [Subsistema, Causa]),
     printllista(Altres).
-
-% Funcio per escriure llista de simptomes
-escriu_llista([]).
-escriu_llista([Cap|Cua]) :-
-    write(Cap), nl,
-    printllista(Cua).
