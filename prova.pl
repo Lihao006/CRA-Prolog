@@ -86,7 +86,12 @@ avaria(aigua, [fuites_aigua, no_hi_ha_aigua], canonada_danyada).
 avaria(gas, [fuites_gas], canonada_gas_danyada).
 avaria(gas, [no_gas], regulador_gas_danyat).
 
-
+% Llista de simptomes de cotxe
+simptomes_cotxe([cotxe_no_arranca, cotxe_no_enfria, no_es_mou, fars_no_funcionen, no_frena]).
+% Llista de simptomes de refrigerador
+simptomes_refrigerador([no_refreda, soroll_fort, baixa_eficiencia, fuites_de_gas, gel_al_evaporador, massa_fred, llum_no_funciona]).
+% Llista de simptomes de cuina
+simptomes_cuina([fuites_gas, fuites_aigua, no_gas, calor, soroll_fort, no_ventila, no_hi_ha_aigua, no_encen_foc]).
 
 % Dialeg amb usuari
 % Introducció
@@ -115,7 +120,7 @@ diagnostica_refrigerador :-
       printllista(Causes),
       write(" "), nl,
       write("Aqui tens de nou la llista de simptomes del refrigerador:"), nl,
-      write("no_refreda, soroll_fort, baixa_eficiencia, fuites_de_gas, gel_al_evaporador, massa_fred, llum_no_funciona"),
+      write("no_refreda, soroll_fort, baixa_eficiencia, fuites_de_gas, gel_al_evaporador, massa_fred, llum_no_funciona"), nl,
       mes_obs(Causes, NovesCauses),
       diagnostica_refrigerador
     ).
@@ -132,7 +137,7 @@ diagnostica_cotxe :-
       printllista(Causes),
       write(" "), nl,
       write("Aqui tens de nou la llista de simptomes del cotxe:"), nl,
-      write("cotxe_no_arranca, cotxe_no_enfria, no_es_mou, fars_no_funcionen, no_frena"),
+      write("cotxe_no_arranca, cotxe_no_enfria, no_es_mou, fars_no_funcionen, no_frena"), nl,
       mes_obs(Causes, NovesCauses),
       diagnostica_cotxe
     ).
@@ -140,7 +145,7 @@ diagnostica_cotxe :-
 
 % Part de diagnostic de cuines
 diagnostica_cuina :-
-    write("Introdueix el simptoma detectat (fuites_gas, fuites_aigua, no_gas, calor, soroll_fort, no_ventila, no_hi_ha_aigua) o 'sortir' per tornar al principi: "), nl,
+    write("Introdueix el simptoma detectat (fuites_gas, fuites_aigua, no_gas, calor, soroll_fort, no_ventila, no_hi_ha_aigua, no_encen_foc) o 'sortir' per tornar al principi: "), nl,
     read(Simptoma),
     ( Simptoma == sortir ->
         start;
@@ -149,7 +154,7 @@ diagnostica_cuina :-
       printllista(Causes),
       write(" "), nl,
       write("Aqui tens de nou la llista de simptomes de la cuina:"), nl,
-      write("fuites_gas, fuites_aigua, no_gas, calor, soroll_fort, no_ventila, no_hi_ha_aigua"),
+      write("fuites_gas, fuites_aigua, no_gas, calor, soroll_fort, no_ventila, no_hi_ha_aigua, no_encen_foc"), nl,
       mes_obs(Causes, NovesCauses),
       diagnostica_cuina
     ).
