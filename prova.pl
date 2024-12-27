@@ -89,14 +89,14 @@ avaria(gas, [no_gas], regulador_gas_danyat).
 
 
 
-% Funcio per demanar mes observacions per reduir causes possibles 
+% Funcio per demanar mes observacions per reduir causes possibles
 mes_obs(Causes, NovesCauses) :-
-    write("Vols introduir mes observacions? (si/no)"), nl,
+    write("Vols introduir més observacions? (si/no)"), nl,
     read(Resposta1),
     ( Resposta1 == no -> 
         NovesCauses = Causes;
       Resposta1 == si -> 
-      write("Si us plau, escriu el nou simptoma:"), nl,
+      write("Si us plau, escriu el nou símptoma:"), nl,
       write("NO INTRODUEIXI EL MATEIX SIMPTOMA DE NOU."), nl,
       read(NouSimptoma),
       % Utilitzem la funcio include que va incorporat en Prolog per filtrar la llista original de Causes en funcio del NouSimptoma introduit per lusuari.
@@ -107,17 +107,17 @@ mes_obs(Causes, NovesCauses) :-
       mes_obs(NovesCausesSegonsNouSimptoma, NovesCauses)
     ).
 
-% Funcio per buscar coincidencies entre el NouSimptoma i la llista Simptomes de cada avaria(...)
+% Funció per buscar coincidencies entre el NouSimptoma i la llista Simptomes de cada avaria(...)
 te_aquest_simptoma(NouSimptoma, (_, _, Simptomes)) :-
     member(NouSimptoma, Simptomes).
 
-% Funcio per trobar totes les causes possibles del problema
+% Funció per trobar totes les causes possibles del problema
 troba_causa(Simptoma, Causes) :-
     % Aqui es busca en totes les avaria(...) coincidencies amb el Simptoma en la llista de Simptomes, 
-    % anotem les dades Subsistema i Causa de les avaria(...) coindidents i es guarden en la llista Causes.
+    % anotem les dades Subsistema i Causa de les avaria(...) coincidents i es guarden en la llista Causes.
     findall((Subsistema, Causa, Simptomes), (avaria(Subsistema, Simptomes, Causa), member(Simptoma, Simptomes)), Causes).
 
-% Funcio per convertir la llista Causes en un seguit de frases.
+% Funció per convertir la llista Causes en un seguit de frases.
 printllista([]).
 printllista([(Subsistema, Causa, _)|Altres]) :-
     format("Subsistema: ~w, possible avaria: ~w~n", [Subsistema, Causa]),
@@ -152,9 +152,9 @@ start :-
     ).
 
 
-% Part de diagnostic de refrigeradors
+% Part de diagnòstic de refrigeradors
 diagnostica_refrigerador :-
-  write("Introdueix el simptoma detectat (no_refreda, soroll_fort, baixa_eficiencia, fuites_de_gas, gel_al_evaporador, massa_fred, llum_no_funciona) o 'sortir' per tornar al principi: "), nl,
+  write("Introdueix el símptoma detectat (no_refreda, soroll_fort, baixa_eficiencia, fuites_de_gas, gel_al_evaporador, massa_fred, llum_no_funciona) o 'sortir' per tornar al principi: "), nl,
   read(Simptoma),
   ( Simptoma == sortir -> 
       start;
@@ -167,9 +167,9 @@ diagnostica_refrigerador :-
   ).
 
 
-% Part de diagnostic de cotxes
+% Part de diagnòstic de cotxes
 diagnostica_cotxe :-
-  write("Introdueix el simptoma detectat (cotxe_no_arranca, cotxe_no_enfria, no_es_mou, fars_no_funcionen, no_frena) o 'sortir' per tornar al principi: "), nl,
+  write("Introdueix el símptoma detectat (cotxe_no_arranca, cotxe_no_enfria, no_es_mou, fars_no_funcionen, no_frena) o 'sortir' per tornar al principi: "), nl,
   read(Simptoma),
   ( Simptoma == sortir ->
       start;
@@ -184,7 +184,7 @@ diagnostica_cotxe :-
 
 % Part de diagnòstic de cuines
 diagnostica_cuina :-
-  write("Introdueix el simptoma detectat (fuites_gas, fuites_aigua, no_gas, calor, soroll_fort, no_ventila, no_hi_ha_aigua, no_encen_foc) o 'sortir' per tornar al principi: "), nl,
+  write("Introdueix el símptoma detectat (fuites_gas, fuites_aigua, no_gas, calor, soroll_fort, no_ventila, no_hi_ha_aigua, no_encen_foc) o 'sortir' per tornar al principi: "), nl,
   read(Simptoma),
   ( Simptoma == sortir ->
       start;
