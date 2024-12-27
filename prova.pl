@@ -87,13 +87,13 @@ avaria(gas, [fuites_gas], canonada_gas_danyada).
 avaria(gas, [no_gas], regulador_gas_danyat).
 
 % Llista de simptomes de cotxe
-simptomes_cotxe([cotxe_no_arranca, cotxe_no_enfria, no_es_mou, fars_no_funcionen, no_frena]).
+Simptomes_cotxe = [cotxe_no_arranca, cotxe_no_enfria, no_es_mou, fars_no_funcionen, no_frena].
 
 % Llista de simptomes de refrigerador
-simptomes_refrigerador([no_refreda, soroll_fort, baixa_eficiencia, fuites_de_gas, gel_al_evaporador, massa_fred, llum_no_funciona]).
+Simptomes_refrigerador = [no_refreda, soroll_fort, baixa_eficiencia, fuites_de_gas, gel_al_evaporador, massa_fred, llum_no_funciona].
 
 % Llista de simptomes de cuina
-simptomes_cuina([fuites_gas, fuites_aigua, no_gas, calor, soroll_fort, no_ventila, no_hi_ha_aigua]).
+Simptomes_cuina = [fuites_gas, fuites_aigua, no_gas, calor, soroll_fort, no_ventila, no_hi_ha_aigua].
 
 
 % Dialeg amb usuari
@@ -121,7 +121,7 @@ diagnostica_refrigerador :-
       troba_causa(Simptoma),
       write(" "), nl,
       write("Aqui tens de nou la llista de simptomes del refrigerador:"), nl,
-      printllista(simptomes_refrigerador),
+      escriu_llista(Simptomes_refrigerador),
       mes_obs
     ).
 
@@ -135,7 +135,7 @@ diagnostica_cotxe :-
       troba_causa(Simptoma),
       write(" "), nl,
       write("Aqui tens de nou la llista de simptomes del cotxe:"), nl,
-      write(simptomes_cotxe(Simptoma)),
+      escriu_llista(Simptomes_cotxe),
       mes_obs
     ).
 
@@ -149,7 +149,7 @@ diagnostica_cuina :-
       troba_causa(Simptoma),
       write(" "), nl,
       write("Aqui tens de nou la llista de simptomes de la cuina:"), nl,
-      write(simptomes_cuina(Simptoma)),
+      escriu_llista(Simptomes_cuina),
       mes_obs
     ).
 
@@ -183,3 +183,9 @@ printllista([]).
 printllista([(Subsistema, Causa)|Altres]) :-
     format("Subsistema: ~w, possible avaria: ~w~n", [Subsistema, Causa]),
     printllista(Altres).
+
+% Funcio per escriure llista de simptomes
+escriu_llista([]).
+printllista([Cap|Cua]) :-
+    write(Cap), nl,
+    printllista(Cua).
