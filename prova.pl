@@ -116,12 +116,10 @@ diagnostica_refrigerador :-
     ( Simptoma == sortir -> 
         start;
       troba_causa(Simptoma, Causes),
-      format("Les possibles causes son de ~w són:", [Simptoma]), nl,
+      format("Les possibles causes de ~w són:", [Simptoma]), nl,
       printllista(Causes),
-      write(" "), nl,
-      write("Aqui tens de nou la llista de simptomes del refrigerador:"), nl,
-      write("no_refreda, soroll_fort, baixa_eficiencia, fuites_de_gas, gel_al_evaporador, massa_fred, llum_no_funciona"), nl,
       mes_obs(Causes, NovesCauses),
+      pregunta_usuari(NovesCauses),
       diagnostica_refrigerador
     ).
 
@@ -133,12 +131,10 @@ diagnostica_cotxe :-
     ( Simptoma == sortir ->
         start;
       troba_causa(Simptoma, Causes),
-      format("Les possibles causes son de ~w són:", [Simptoma]), nl,
+      format("Les possibles causes de ~w són:", [Simptoma]), nl,
       printllista(Causes),
-      write(" "), nl,
-      write("Aqui tens de nou la llista de simptomes del cotxe:"), nl,
-      write("cotxe_no_arranca, cotxe_no_enfria, no_es_mou, fars_no_funcionen, no_frena"), nl,
       mes_obs(Causes, NovesCauses),
+      pregunta_usuari(NovesCauses),
       diagnostica_cotxe
     ).
 
@@ -150,12 +146,10 @@ diagnostica_cuina :-
     ( Simptoma == sortir ->
         start;
       troba_causa(Simptoma, Causes),
-      format("Les possibles causes son de ~w són:", [Simptoma]), nl,
+      format("Les possibles causes de ~w són:", [Simptoma]), nl,
       printllista(Causes),
-      write(" "), nl,
-      write("Aqui tens de nou la llista de simptomes de la cuina:"), nl,
-      write("fuites_gas, fuites_aigua, no_gas, calor, soroll_fort, no_ventila, no_hi_ha_aigua, no_encen_foc"), nl,
       mes_obs(Causes, NovesCauses),
+      pregunta_usuari(NovesCauses),
       diagnostica_cuina
     ).
 
@@ -167,7 +161,7 @@ mes_obs(Causes, NovesCauses) :-
         NovesCauses = Causes, start;
       Resposta1 == si -> 
       write("Si us plau, escriu el nou simptoma:"), nl,
-      write("NO INTRODUEIXI EL MATEIX SIMPTOMA DE NOU."), nl,
+      write("NO INTRODUEIXIS EL MATEIX SIMPTOMA DE NOU."), nl,
       read(NouSimptoma),
       include(te_aquest_simptoma(NouSimptoma), Causes, NovesCausesSegonsNouSimptoma),
       printllista(NovesCausesSegonsNouSimptoma),
@@ -189,3 +183,15 @@ printllista([]).
 printllista([(Subsistema, Causa, _)|Altres]) :-
     format("Subsistema: ~w, possible avaria: ~w~n", [Subsistema, Causa]),
     printllista(Altres).
+
+% Funció per preguntar a usuari si les causes filtrades que queden son correctes
+% Suposem que l usuari va a comprovar si els subsistemes estan correctes o no
+pregunta_usuari([]).
+pregunta_usuari([(Subsistema, Causa, Simptomes)|Altres]) :-
+    format("Podria ser ~w en el subsistema ~w? (si/no): ", [Causa, Subsistema]), nl,
+    read(Resposta),
+    ( Resposta == si ->
+        format("La causa del problema és ~w en el subsistema ~w.~n", [Causa, Subsistema]);
+      Resposta == no ->
+        pregunta_usuari(Altres)
+    ).
