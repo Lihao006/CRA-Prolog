@@ -89,7 +89,7 @@ avaria(gas, [no_gas], regulador_gas_danyat).
 
 
 
-% Funcio per demanar mes observacions per reduir causes possibles
+% Funcio per demanar mes observacions per reduir causes possibles 
 mes_obs(Causes, NovesCauses) :-
     write("Vols introduir mes observacions? (si/no)"), nl,
     read(Resposta1),
