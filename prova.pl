@@ -139,6 +139,8 @@ diagnostica_cuina :-
 
 % Funcio per trobar totes les causes possibles del problema
 troba_causa(Simptoma) :-
+    % Aqui es busca en totes les avaria(...) coincidencies amb el Simptoma en la llista de Simptomes, 
+    % anotem les dades Subsistema i Causa de les avaria(...) coindidents i es guarden en la llista Causes.
     findall((Subsistema, Causa), (avaria(Subsistema, Simptomes, Causa), member(Simptoma, Simptomes)), Causes),
     format("Les possibles causes son de ~w són:", [Simptoma]), nl,
     printllista(Causes).
