@@ -43,6 +43,10 @@ avaria(fre, [no_frena], problema_abs).
 
 % Dialeg amb usuari
 diagnostica :-
+    write('Hola! Benvingut/da al programa de solucio de cotxes, refrigeradors i components de cuina'), nl,
+    write("Si us plau, no escriguis accents ni caràcters especials, inlcoent majúscules, per evitar errors ;)"), nl,
+    write("Quin es el teu nom?"), read(Nom)
+    format("D'acord, , ~w, introdueix el sistema: cotxe, refrigerador o cuina.~n", [Nom]), read(Sistema),
     write("Introdueix el simptoma detectat (cotxe_no_arranca, cotxe_no_enfria, cotxe_fa_soroll, fars_no_funcionen, no_frena) o 'sortir' per acabar: "), nl,
     read(Simptoma),
     ( Simptoma == sortir ->
