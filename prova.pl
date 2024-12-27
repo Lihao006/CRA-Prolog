@@ -55,7 +55,7 @@ diagnostica :-
       diagnostica
     ).
 
-% Funcio per trobar la causa del problema
+% Funcio per trobar totes les causes possibles del problema
 troba_causa(Simptoma) :-
     findall((Subsistema, Causa), avaria(Subsistema, Simptomes, Causa), Causes),
     format("Les possibles causes son de ~w són:", [Simptoma]), nl,
