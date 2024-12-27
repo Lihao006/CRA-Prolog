@@ -127,7 +127,7 @@ printllista([(Subsistema, Causa, _)|Altres]) :-
 % Suposem que l usuari va a comprovar si els components dels subsistemes esmentades estan correctes o no
 pregunta_usuari([]).
 pregunta_usuari([(Subsistema, Causa, _)|Altres]) :-
-    format("Podria ser ~w en el subsistema ~w? (si/no): ", [Causa, Subsistema]), nl,
+    format("Comprova si hi ha ~w en el subsistema ~w? (si/no): ", [Causa, Subsistema]), nl,
     read(Resposta),
     ( Resposta == si ->
         format("La causa del problema és ~w en el subsistema ~w.~n", [Causa, Subsistema]);
