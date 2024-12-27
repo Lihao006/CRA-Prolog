@@ -86,6 +86,15 @@ avaria(aigua, [fuites_aigua, no_hi_ha_aigua], canonada_danyada).
 avaria(gas, [fuites_gas], canonada_gas_danyada).
 avaria(gas, [no_gas], regulador_gas_danyat).
 
+% Llista de simptomes de cotxe
+simptomes_cotxe([cotxe_no_arranca, cotxe_no_enfria, no_es_mou, fars_no_funcionen, no_frena]).
+
+% Llista de simptomes de refrigerador
+simptomes_refrigerador([no_refreda, soroll_fort, baixa_eficiencia, fuites_de_gas, gel_al_evaporador, massa_fred, llum_no_funciona]).
+
+% Llista de simptomes de cuina
+simptomes_cuina([fuites_gas, fuites_aigua, no_gas, calor, soroll_fort, no_ventila, no_hi_ha_aigua]).
+
 
 % Dialeg amb usuari
 % Introducció
@@ -110,7 +119,10 @@ diagnostica_refrigerador :-
     ( Simptoma == sortir -> 
         start;
       troba_causa(Simptoma),
-      diagnostica_refrigerador
+      write(" "), nl,
+      write("Aqui tens de nou la llista de simptomes del refrigerador:"), nl,
+      printllista(simptomes_refrigerador),
+      mes_obs
     ).
 
 
@@ -121,7 +133,10 @@ diagnostica_cotxe :-
     ( Simptoma == sortir ->
         start;
       troba_causa(Simptoma),
-      diagnostica_cotxe
+      write(" "), nl,
+      write("Aqui tens de nou la llista de simptomes del cotxe:"), nl,
+      write(simptomes_cotxe(Simptoma)),
+      mes_obs
     ).
 
 
@@ -132,18 +147,28 @@ diagnostica_cuina :-
     ( Simptoma == sortir ->
         start;
       troba_causa(Simptoma),
-      diagnostica_cuina
+      write(" "), nl,
+      write("Aqui tens de nou la llista de simptomes de la cuina:"), nl,
+      write(simptomes_cuina(Simptoma)),
+      mes_obs
     ).
 
 % Funcio per demanar mes observacions
-mes_obs :-
+mes_obs(Causes, NovesCauses) :-
     write("Vols introduir mes observacions? (si/no)"),
     read(Resposta1),
     (Resposta1 == no -> start;
     Resposta1 == si -> 
-    write("Si us plau, escriu el nou simptoma: "),
-    write("NO INTRODUEIXI EL MATEIX SIMPTOMA DE NOU.")
+    write("Si us plau, escriu el nou simptoma:"),
+    write("NO INTRODUEIXI EL MATEIX SIMPTOMA DE NOU."),
+    read(NouSimptoma),
+    include(te_aquest_simptoma(NouSimptoma), Causes, NovesCauses),
+    mes_obs(NovesCausesSegonsNouSimptoma, NovesCauses).
+    ).
 
+% Funcio per buscar coincidencies entre el NouSimptoma i la llista Simptomes de cada avaria(...)
+te_aquest_simptoma(NouSimptoma, (Subsistema, Simptomes, Causa)) :-
+    member(NouSimptoma, Simptomes).
 
 % Funcio per trobar totes les causes possibles del problema
 troba_causa(Simptoma) :-
