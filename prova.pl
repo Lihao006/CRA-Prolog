@@ -52,7 +52,7 @@ diagnostica :-
     ).
 
 troba_causa(Simptoma) :-
-    avaria(Problema, Sintomes, Causa),
-    member(Simptoma, Sintomes),
+    avaria(Problema, Simptomes, Causa),
+    member(Simptoma, Simptomes),
     write("Possible problema: "), write(Problema), nl,
     write("Explicacio: "), write(Causa), nl.
