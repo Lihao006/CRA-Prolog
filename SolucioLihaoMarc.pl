@@ -53,8 +53,14 @@ avaria(fre, bomba_frens_defectuosa).
 avaria(fre, problema_abs).
 
 
+% Alguns problemes que pot tenir un cotxe
+problema(cotxe_no_arranca).
+problema(cotxe_no_enfria).
+problema(cotxe_fa_soroll).
+problema(fars_no_funcionen).
+problema(no_frena).
 
-% Possibles causes de avaries en cotxes
+% Possibles causes de problemes en cotxes
 causa(cotxe_no_arranca, sistema_electric, bateria_defectuosa).
 causa(cotxe_no_arranca, sistema_electric, fallada_bobina_encendre).
 causa(cotxe_no_arranca, sistema_electric, fusibles_cremats).
