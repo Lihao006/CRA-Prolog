@@ -157,7 +157,8 @@ diagnostica_cuina :-
 mes_obs(Causes, NovesCauses) :-
     write("Vols introduir mes observacions? (si/no)"),
     read(Resposta1),
-    (Resposta1 == no -> start;
+    (Resposta1 == no -> 
+    NovesCauses = Causes, start;
     Resposta1 == si -> 
     write("Si us plau, escriu el nou simptoma:"),
     write("NO INTRODUEIXI EL MATEIX SIMPTOMA DE NOU."),
