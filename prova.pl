@@ -58,7 +58,6 @@ diagnostica :-
       troba_causa(Simptoma),
       diagnostica
     ).
-    write("")
 
 % Funcio per trobar totes les causes possibles del problema
 troba_causa(Simptoma) :-
