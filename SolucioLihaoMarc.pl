@@ -112,9 +112,9 @@ start :-
     findall(Patro, (member(Patro, Patrons), sub_atom(Observacio_del_usuari, _, _, _, Patro)), Resultats),
     ( Resultats = [] -> write("Ho sento, però no puc ajudar-te amb aquesta observació.");
     format("S'han trobar les paraules claus següents: ~w", [Resultats]),
-    format("Es refereix a ~w ?", [causa(Observacio, Subsistema, Avaria)]),
+    format("Es refereix a ~w ?", [problema(Observacio)]),
     format("Si us plau, escriu 'si' o 'no'"), read(Resposta),
-    Resposta = 'si' -> format("La causa de l'avaria és ~w", [Avaria]);
+    Resposta = 'si' -> format("La causa del problema pot ser ~w", [causa(Observacio, Subsistema, Avaria)]),;
     
       
       )
