@@ -34,20 +34,20 @@ avaria(transmissio, [no_es_mou], baix_nivell_flux).
 avaria(transmissio, [no_es_mou], embragatge_desgastat).
 avaria(transmissio, [no_es_mou], fallada_sistema_hidraulic).
 
-avaria(encesa, [cotxe_no_arranca], bateria_defectuosa).
-avaria(encesa, [cotxe_no_arranca], fallada_bobina_encendre).
-avaria(encesa, [cotxe_no_arranca], fusibles_cremats).
+avaria(encesa, [cotxe_no_arranca, no_es_mou], bateria_defectuosa).
+avaria(encesa, [cotxe_no_arranca, no_es_mou], fallada_bobina_encendre).
+avaria(encesa, [cotxe_no_arranca, no_es_mou], fusibles_cremats).
 
-avaria(sistema_electric, [cotxe_no_arranca, fars_no_funcionen], bateria_defectuosa).
+avaria(sistema_electric, [cotxe_no_arranca, no_es_mou, fars_no_funcionen], bateria_defectuosa).
 avaria(sistema_electric, [fars_no_funcionen], alternador_defectuos).
-avaria(sistema_electric, [cotxe_no_arranca, fars_no_funcionen], fusibles_cremats).
+avaria(sistema_electric, [cotxe_no_arranca, no_es_mou, fars_no_funcionen], fusibles_cremats).
 
 avaria(sistema_de_confort_interior, [cotxe_no_enfria], fallada_motor_ventilador).
 avaria(sistema_de_confort_interior, [cotxe_no_enfria], fuga_gas_refrigerant).
 avaria(sistema_de_confort_interior, [cotxe_no_enfria], fallada_compressor).
 
-avaria(motor, [cotxe_no_arranca], bugia_defectuosa).
-avaria(motor, [cotxe_no_arranca], bomba_aigua_defectuosa).
+avaria(motor, [cotxe_no_arranca, no_es_mou], bugia_defectuosa).
+avaria(motor, [cotxe_no_arranca, no_es_mou], bomba_aigua_defectuosa).
 avaria(motor, [no_es_mou], carter_danyat).
 
 avaria(fre, [no_frena], pastilles_desgastades).
@@ -135,6 +135,14 @@ diagnostica_cuina :-
       diagnostica_cuina
     ).
 
+% Funcio per demanar mes observacions
+mes_obs :-
+    write("Vols introduir mes observacions? (si/no)"),
+    read(Resposta1),
+    (Resposta1 == no -> start;
+    Resposta1 == si -> 
+    write("Si us plau, escriu el nou simptoma: "),
+    write("NO INTRODUEIXI EL MATEIX SIMPTOMA DE NOU.")
 
 
 % Funcio per trobar totes les causes possibles del problema
