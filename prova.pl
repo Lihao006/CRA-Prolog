@@ -121,8 +121,8 @@ diagnostica_refrigerador :-
       troba_causa(Simptoma),
       write(" "), nl,
       write("Aqui tens de nou la llista de simptomes del refrigerador:"), nl,
-      escriu_llista(Simptomes_refrigerador),
-      mes_obs
+      write("no_refreda, soroll_fort, baixa_eficiencia, fuites_de_gas, gel_al_evaporador, massa_fred, llum_no_funciona")
+      mes_obs(Causes, NovesCauses)
     ).
 
 
@@ -135,8 +135,8 @@ diagnostica_cotxe :-
       troba_causa(Simptoma),
       write(" "), nl,
       write("Aqui tens de nou la llista de simptomes del cotxe:"), nl,
-      escriu_llista(Simptomes_cotxe),
-      mes_obs
+      write("cotxe_no_arranca, cotxe_no_enfria, no_es_mou, fars_no_funcionen, no_frena")
+      mes_obs(Causes, NovesCauses)
     ).
 
 
@@ -149,11 +149,11 @@ diagnostica_cuina :-
       troba_causa(Simptoma),
       write(" "), nl,
       write("Aqui tens de nou la llista de simptomes de la cuina:"), nl,
-      escriu_llista(Simptomes_cuina),
-      mes_obs
+      write("fuites_gas, fuites_aigua, no_gas, calor, soroll_fort, no_ventila, no_hi_ha_aigua")
+      mes_obs(Causes, NovesCauses)
     ).
 
-% Funcio per demanar mes observacions
+% Funcio per demanar mes observacions per reduir causes possibles
 mes_obs(Causes, NovesCauses) :-
     write("Vols introduir mes observacions? (si/no)"),
     read(Resposta1),
@@ -162,12 +162,12 @@ mes_obs(Causes, NovesCauses) :-
     write("Si us plau, escriu el nou simptoma:"),
     write("NO INTRODUEIXI EL MATEIX SIMPTOMA DE NOU."),
     read(NouSimptoma),
-    include(te_aquest_simptoma(NouSimptoma), Causes, NovesCauses),
+    include(te_aquest_simptoma(NouSimptoma), Causes, NovesCausesSegonsNouSimptoma),
     mes_obs(NovesCausesSegonsNouSimptoma, NovesCauses).
     ).
 
 % Funcio per buscar coincidencies entre el NouSimptoma i la llista Simptomes de cada avaria(...)
-te_aquest_simptoma(NouSimptoma, (Subsistema, Simptomes, Causa)) :-
+te_aquest_simptoma(NouSimptoma, (_, _, Simptomes)) :-
     member(NouSimptoma, Simptomes).
 
 % Funcio per trobar totes les causes possibles del problema
@@ -186,6 +186,6 @@ printllista([(Subsistema, Causa)|Altres]) :-
 
 % Funcio per escriure llista de simptomes
 escriu_llista([]).
-printllista([Cap|Cua]) :-
+escriu_llista([Cap|Cua]) :-
     write(Cap), nl,
     printllista(Cua).
