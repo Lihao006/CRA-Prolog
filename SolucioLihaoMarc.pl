@@ -107,6 +107,9 @@ start :-
     ( Resultats = [] -> write("Ho sento, però no puc ajudar-te amb aquesta observació.");
     format("S'han trobar les paraules claus següents: ~w", [Resultats]),
     format("Es refereix a ~w ?", [causa(Observacio, Subsistema, Avaria)]),
+    format("Si us plau, escriu 'si' o 'no'"), read(Resposta),
+    Resposta = 'si' -> format("La causa de l'avaria és ~w", [Avaria]);
+     
       
       )
 
