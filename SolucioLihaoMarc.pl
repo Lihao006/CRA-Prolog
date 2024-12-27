@@ -8,6 +8,7 @@
 
 % Comandes de Prolog:
 % https://es.scribd.com/document/373662386/Comandos-Prolog
+% https://www.swi-prolog.org/pldoc/man?section=builtin
 
 sistema(cotxe).
 sistema(refrigerador).
