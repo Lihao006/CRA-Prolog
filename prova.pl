@@ -27,7 +27,7 @@ subsistema(cuina, gas).
 
 % Avaries cotxes
 avaria(direccio, [no_es_mou, vibracions], manegues_desgastades).
-avaria(direccio, [no_es_mou], baix_nivell_oli_direccio).
+avaria(direccio, [no_es_mou], baix_nivell_oli).
 avaria(direccio, [no_es_mou], fallada_sistema_hidraulic).
 avaria(direccio, [vibracions], pneumatic_punxat).
 
@@ -56,6 +56,7 @@ avaria(motor, [no_engega_motor, no_es_mou], bugia_defectuosa).
 avaria(motor, [no_engega_motor, no_es_mou], bomba_aigua_defectuosa).
 avaria(motor, [no_es_mou], carter_danyat).
 avaria(motor, [vibracions], filtres_motor_defectuosos).
+avaria(motor, [vibracions], baix_nivell_oli).
 
 avaria(fre, [no_frena, vibracions], pastilles_desgastades).
 avaria(fre, [no_frena, vibracions], discos_desgastats).
@@ -128,7 +129,7 @@ troba_causa(Simptoma, Causes) :-
 % Funció per convertir la llista Causes en un seguit de frases.
 printllista([]).
 printllista([(Subsistema, Causa, _)|Altres]) :-
-    format("Subsistema: ~w, possible avaria: ~w~n", [Subsistema, Causa]),
+    format("Possible subsistema afectat: ~w, possible avaria: ~w~n", [Subsistema, Causa]),
     printllista(Altres).
 
 % Funció per preguntar a usuari si les causes filtrades que queden son correctes
