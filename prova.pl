@@ -2,27 +2,25 @@ sistema(cotxe).
 sistema(refrigerador).
 sistema(cuina).
 
+
 % Subsistemes de cotxe
 subsistema(cotxe, direccio).
 subsistema(cotxe, transmissio).
 subsistema(cotxe, encesa).
-subsistema(cotxe, sistema_electric).
-subsistema(cotxe, sistema_de_confort_interior).
+subsistema(cotxe, electric).
+subsistema(cotxe, confort_interior).
 subsistema(cotxe, motor).
 
 % Subsistemes de refrigerador
-subsistema(refrigerador, refrigeracio).
-subsistema(refrigerador, control_temperatura).
-subsistema(refrigerador, circulacio_aire).
-subsistema(refrigerador, desgel).
-subsistema(refrigerador, iluminacio).
+subsistema(refrigerador, refrigerant).
+subsistema(refrigerador, electric).
+subsistema(refrigerador, aillament).
+subsistema(refrigerador, descongelacio).
 
 % Subsistemes de cuina
-subsistema(cuina, control).
-subsistema(cuina, ventilacio).
-subsistema(cuina, aigua).
+subsistema(cuina, electric).
 subsistema(cuina, gas).
-
+subsistema(cuina, mecanic).
 
 
 % Avaries cotxes
@@ -38,22 +36,22 @@ avaria(transmissio, [vibracions], eixos_desgastats).
 avaria(transmissio, [vibracions], amortidors_desgastats).
 avaria(transmissio, [vibracions], caixa_canvis_defectuosa).
 
-avaria(encesa, [no_engega_motor, no_es_mou], bateria_descarregada).
-avaria(encesa, [no_engega_motor, no_es_mou], fallada_bobina_encendre).
-avaria(encesa, [no_engega_motor, no_es_mou], fusibles_cremats).
-avaria(encesa, [no_engega_motor, no_es_mou], falta_combustible).
+avaria(encesa, [no_encen_motor, no_es_mou], bateria_descarregada).
+avaria(encesa, [no_encen_motor, no_es_mou], fallada_bobina_encendre).
+avaria(encesa, [no_encen_motor, no_es_mou], fusibles_cremats).
+avaria(encesa, [no_encen_motor, no_es_mou], falta_combustible).
 
-avaria(sistema_electric, [no_engega_motor, no_es_mou, fars_no_funcionen], bateria_descarregada).
-avaria(sistema_electric, [fars_no_funcionen], alternador_defectuos).
-avaria(sistema_electric, [no_engega_motor, no_es_mou, fars_no_funcionen], fusibles_cremats).
+avaria(electric, [no_encen_motor, no_es_mou, fars_no_funcionen], bateria_descarregada).
+avaria(electric, [fars_no_funcionen], alternador_defectuos).
+avaria(electric, [no_encen_motor, no_es_mou, fars_no_funcionen], fusibles_cremats).
 
-avaria(sistema_de_confort_interior, [no_funciona_aire_acondicionat], fallada_motor_ventilador).
-avaria(sistema_de_confort_interior, [no_funciona_aire_acondicionat], fuga_gas_refrigerant).
-avaria(sistema_de_confort_interior, [no_funciona_aire_acondicionat], fallada_compressor).
-avaria(sistema_de_confort_interior, [no_funciona_aire_acondicionat], filtre_aire_defectuos).
+avaria(confort_interior, [no_funciona_aire_acondicionat], fallada_motor_ventilador).
+avaria(confort_interior, [no_funciona_aire_acondicionat], fuga_gas_refrigerant).
+avaria(confort_interior, [no_funciona_aire_acondicionat], fallada_compressor).
+avaria(confort_interior, [no_funciona_aire_acondicionat], filtre_aire_defectuos).
 
-avaria(motor, [no_engega_motor, no_es_mou], bugia_defectuosa).
-avaria(motor, [no_engega_motor, no_es_mou], bomba_aigua_defectuosa).
+avaria(motor, [no_encen_motor, no_es_mou], bugia_defectuosa).
+avaria(motor, [no_encen_motor, no_es_mou], bomba_aigua_defectuosa).
 avaria(motor, [no_es_mou], carter_danyat).
 avaria(motor, [vibracions], filtres_motor_defectuosos).
 avaria(motor, [vibracions], baix_nivell_oli).
@@ -64,19 +62,22 @@ avaria(fre, [no_frena], bomba_frens_defectuosa).
 avaria(fre, [no_frena], problema_abs).
 
 
-
 % Avaries refrigeradors
-avaria(refrigeracio, [no_refreda, soroll_fort, baixa_eficiencia], compressor_danyat).
-avaria(refrigeracio, [fuites_de_gas, baixa_eficiencia, no_refreda], sistema_de_refrigerant_perdut).
-avaria(refrigeracio, [gel_al_evaporador], sistema_de_desgel_danyat).
+avaria(refrigerant, [no_refreda, soroll_fort, fuita_gas], compressor_defectuos).
+avaria(refrigerant, [no_refreda, fuita_gas, fuita_liquid], condensador_defectuos).
+avaria(refrigerant, [no_refreda, fuita_gas, fuita_liquid], evaporador_defectuos).
+avaria(refrigerant, [no_refreda], valvula_expansio_defectuos).
 
-avaria(control_temperatura, [no_refreda, massa_fred], termostat_danyat).
+avaria(electric, [marca_malament_temperatura, no_encen_panell], panell_defectuós).
+avaria(electric, [marca_malament_temperatura, no_refreda, refreda_massa], termostat_defectuós).
+avaria(electric, [no_encen_llum], bombeta_fossa).
+avaria(electric, [no_refreda], ventilador_defectuós).
 
-avaria(circulacio_aire, [no_refreda, soroll_fort], ventilador_danyat).
+avaria(aillament, [no_refreda], aillament_termic_defectuós).
+avaria(aillament, [no_tanca_be], juntes_porta_defectuoses).
 
-avaria(desgel, [gel_al_evaporador], resistencia_desgel_danyada).
-
-avaria(iluminacio, [llum_no_funciona], bombeta_fosa).
+avaria(descongelacio, [acumulacio_gel], escalfador_defectuós).
+avaria(descongelacio, [surt_aigua], drenatge_defectuós).
 
 
 
@@ -164,7 +165,7 @@ start :-
 
 % Part de diagnòstic de refrigeradors
 diagnostica_refrigerador :-
-  write("Introdueix el simptoma detectat (no_refreda, soroll_fort, baixa_eficiencia, fuites_de_gas, gel_al_evaporador, massa_fred, llum_no_funciona) o 'sortir' per diagnosticar un aparell diferent (encara que sigui el mateix sistema):"), nl,
+  write("Introdueix el simptoma detectat (no_refreda, soroll_fort, fuita_gas, fuita_liquid, marca_malament_temperatura, no_encen_panell, refreda_massa, no_encen_llum, no_tanca_be, acumulacio_gel, surt_aigua) o 'sortir' per diagnosticar un aparell diferent (encara que sigui el mateix sistema):"), nl,
   read(Simptoma),
   ( Simptoma == sortir -> 
       start;
@@ -179,7 +180,7 @@ diagnostica_refrigerador :-
 
 % Part de diagnòstic de cotxes
 diagnostica_cotxe :-
-  write("Introdueix el simptoma detectat (no_engega_motor, no_funciona_aire_acondicionat, no_es_mou, vibracions, fars_no_funcionen, no_frena) o 'sortir' per diagnosticar un aparell diferent (encara que sigui el mateix sistema):"), nl,
+  write("Introdueix el simptoma detectat (no_encen_motor, no_funciona_aire_acondicionat, no_es_mou, vibracions, fars_no_funcionen, no_frena) o 'sortir' per diagnosticar un aparell diferent (encara que sigui el mateix sistema):"), nl,
   read(Simptoma),
   ( Simptoma == sortir ->
       start;
