@@ -96,7 +96,6 @@ avaria(gas, [no_gas], regulador_gas_danyat).
 
 
 
-
 % Funcio per demanar mes observacions per reduir causes possibles
 mes_obs(Causes, NovesCauses) :-
     write("Vols introduir mes observacions? (si/no)"), nl,
@@ -108,8 +107,8 @@ mes_obs(Causes, NovesCauses) :-
       write("NO INTRODUEIXI EL MATEIX SIMPTOMA DE NOU."), nl,
       read(NouSimptoma),
       % Utilitzem la funcio include que va incorporat en Prolog per filtrar la llista original de Causes en funcio del NouSimptoma introduit per lusuari.
-      % Funciona te_aquest_simptoma(NouSimptoma) amb un sol arguement qaun en teoria necessita dos pq es una funcio parcial(pot esperar a q li donin el segon argument)
-      % La funcio include afegeix el segon argument a te_aquest_simptoma automaticament, q son cada un dels elements de la llista Causes
+      % Funciona te_aquest_simptoma(NouSimptoma) amb un sol arguement quan en teoria necessita dos pq es una funcio parcial(pot esperar a q li donin el segon argument)
+      % La funcio include afegeix el segon argument a te_aquest_simptoma automaticament, q és cada un dels elements de la llista Causes
       % Si retorna false és simplement que ha filtrat totes les causes i no queden cap :(
       include(te_aquest_simptoma(NouSimptoma), Causes, NovesCausesSegonsNouSimptoma),
       printllista(NovesCausesSegonsNouSimptoma),
