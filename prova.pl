@@ -38,12 +38,12 @@ avaria(transmissio, [vibracions], eixos_desgastats).
 avaria(transmissio, [vibracions], amortidors_desgastats).
 avaria(transmissio, [vibracions], caixa_canvis_defectuosa).
 
-avaria(encesa, [no_engega_motor, no_es_mou], bateria_defectuosa).
+avaria(encesa, [no_engega_motor, no_es_mou], bateria_descarregada).
 avaria(encesa, [no_engega_motor, no_es_mou], fallada_bobina_encendre).
 avaria(encesa, [no_engega_motor, no_es_mou], fusibles_cremats).
 avaria(encesa, [no_engega_motor, no_es_mou], falta_combustible).
 
-avaria(sistema_electric, [no_engega_motor, no_es_mou, fars_no_funcionen], bateria_defectuosa).
+avaria(sistema_electric, [no_engega_motor, no_es_mou, fars_no_funcionen], bateria_descarregada).
 avaria(sistema_electric, [fars_no_funcionen], alternador_defectuos).
 avaria(sistema_electric, [no_engega_motor, no_es_mou, fars_no_funcionen], fusibles_cremats).
 
