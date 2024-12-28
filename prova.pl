@@ -55,7 +55,7 @@ avaria(sistema_de_confort_interior, [no_funciona_aire_acondicionat], filtre_aire
 avaria(motor, [no_engega_motor, no_es_mou], bugia_defectuosa).
 avaria(motor, [no_engega_motor, no_es_mou], bomba_aigua_defectuosa).
 avaria(motor, [no_es_mou], carter_danyat).
-avaria(motor, [no_es_mou], filtres_motor_defectuosos).
+avaria(motor, [vibracions], filtres_motor_defectuosos).
 
 avaria(fre, [no_frena, vibracions], pastilles_desgastades).
 avaria(fre, [no_frena, vibracions], discos_desgastats).
