@@ -26,32 +26,39 @@ subsistema(cuina, gas).
 
 
 % Avaries cotxes
-avaria(direccio, [no_es_mou], manegues_desgastades).
+avaria(direccio, [no_es_mou, vibracions], manegues_desgastades).
 avaria(direccio, [no_es_mou], baix_nivell_oli_direccio).
 avaria(direccio, [no_es_mou], fallada_sistema_hidraulic).
+avaria(direccio, [vibracions], pneumatic_punxat).
 
-avaria(transmissio, [no_es_mou], baix_nivell_flux).
+avaria(transmissio, [no_es_mou], baix_nivell_liquid_refrigerant).
 avaria(transmissio, [no_es_mou], embragatge_desgastat).
 avaria(transmissio, [no_es_mou], fallada_sistema_hidraulic).
+avaria(transmissio, [vibracions], eixos_desgastats).
+avaria(transmissio, [vibracions], amortidors_desgastats).
+avaria(transmissio, [vibracions], caixa_canvis_defectuosa).
 
-avaria(encesa, [cotxe_no_arranca, no_es_mou], bateria_defectuosa).
-avaria(encesa, [cotxe_no_arranca, no_es_mou], fallada_bobina_encendre).
-avaria(encesa, [cotxe_no_arranca, no_es_mou], fusibles_cremats).
+avaria(encesa, [no_engega_motor, no_es_mou], bateria_defectuosa).
+avaria(encesa, [no_engega_motor, no_es_mou], fallada_bobina_encendre).
+avaria(encesa, [no_engega_motor, no_es_mou], fusibles_cremats).
+avaria(encesa, [no_engega_motor, no_es_mou], falta_combustible).
 
-avaria(sistema_electric, [cotxe_no_arranca, no_es_mou, fars_no_funcionen], bateria_defectuosa).
+avaria(sistema_electric, [no_engega_motor, no_es_mou, fars_no_funcionen], bateria_defectuosa).
 avaria(sistema_electric, [fars_no_funcionen], alternador_defectuos).
-avaria(sistema_electric, [cotxe_no_arranca, no_es_mou, fars_no_funcionen], fusibles_cremats).
+avaria(sistema_electric, [no_engega_motor, no_es_mou, fars_no_funcionen], fusibles_cremats).
 
-avaria(sistema_de_confort_interior, [cotxe_no_enfria], fallada_motor_ventilador).
-avaria(sistema_de_confort_interior, [cotxe_no_enfria], fuga_gas_refrigerant).
-avaria(sistema_de_confort_interior, [cotxe_no_enfria], fallada_compressor).
+avaria(sistema_de_confort_interior, [no_funciona_aire_acondicionat], fallada_motor_ventilador).
+avaria(sistema_de_confort_interior, [no_funciona_aire_acondicionat], fuga_gas_refrigerant).
+avaria(sistema_de_confort_interior, [no_funciona_aire_acondicionat], fallada_compressor).
+avaria(sistema_de_confort_interior, [no_funciona_aire_acondicionat], filtre_aire_defectuos).
 
-avaria(motor, [cotxe_no_arranca, no_es_mou], bugia_defectuosa).
-avaria(motor, [cotxe_no_arranca, no_es_mou], bomba_aigua_defectuosa).
+avaria(motor, [no_engega_motor, no_es_mou], bugia_defectuosa).
+avaria(motor, [no_engega_motor, no_es_mou], bomba_aigua_defectuosa).
 avaria(motor, [no_es_mou], carter_danyat).
+avaria(motor, [no_es_mou], filtres_motor_defectuosos).
 
-avaria(fre, [no_frena], pastilles_desgastades).
-avaria(fre, [no_frena], discos_desgastats).
+avaria(fre, [no_frena, vibracions], pastilles_desgastades).
+avaria(fre, [no_frena, vibracions], discos_desgastats).
 avaria(fre, [no_frena], bomba_frens_defectuosa).
 avaria(fre, [no_frena], problema_abs).
 
@@ -170,7 +177,7 @@ diagnostica_refrigerador :-
 
 % Part de diagnòstic de cotxes
 diagnostica_cotxe :-
-  write("Introdueix el simptoma detectat (cotxe_no_arranca, cotxe_no_enfria, no_es_mou, fars_no_funcionen, no_frena) o 'sortir' per diagnosticar un aparell diferent (encara que sigui el mateix sistema):"), nl,
+  write("Introdueix el simptoma detectat (no_engega_motor, no_funciona_aire_acondicionat, no_es_mou, vibracions, fars_no_funcionen, no_frena) o 'sortir' per diagnosticar un aparell diferent (encara que sigui el mateix sistema):"), nl,
   read(Simptoma),
   ( Simptoma == sortir ->
       start;
