@@ -116,8 +116,11 @@ mes_obs(Causes, NovesCauses) :-
       % FInalment es crida recursivament per si lusuari vol seguir filtrant causes
       % Si retorna false és simplement que ha filtrat totes les causes i no queden cap :(
       include(te_aquest_simptoma(NouSimptoma), Causes, NovesCausesSegonsNouSimptoma),
+      ( NovesCausesSegonsNouSimptoma == [] -> 
+          format("Això no és possible.~n");
       printllista(NovesCausesSegonsNouSimptoma),
       mes_obs(NovesCausesSegonsNouSimptoma, NovesCauses)
+    )
     ).
 
 % Funció per buscar coincidencies entre el NouSimptoma i la llista Simptomes de cada avaria(...)
