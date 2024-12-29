@@ -72,6 +72,7 @@ avaria(electric, [marca_malament_temperatura, no_encen_panell], panell_defectuó
 avaria(electric, [marca_malament_temperatura, no_refreda, refreda_massa], termostat_defectuós).
 avaria(electric, [no_encen_llum], bombeta_fossa).
 avaria(electric, [no_refreda], ventilador_defectuós).
+avaria(electric, [no_refreda, no_encen_llum, no_encen_panell], falta_potencia_electrica).
 
 avaria(aillament, [no_refreda], aillament_termic_defectuós).
 avaria(aillament, [no_tanca_be], juntes_porta_defectuoses).
@@ -82,18 +83,19 @@ avaria(descongelacio, [surt_aigua], drenatge_defectuós).
 
 
 % Avaries cuines
-avaria(control, [fuites_gas, fuites_aigua], fallada_valvula_seguretat).
-avaria(control, [no_gas, no_encen_foc], fallada_encenedor).
-avaria(control, [calor], termostat_danyat).
+avaria(electric, [acumulacio_fum], extractor_defectuos).
+avaria(electric, [no_encen_panell_forn, forn_no_calenta], panell_forn_defectuos).
+avaria(electric, [forn_no_calenta, salta_diferencial], resistencia_defectuos).
+avaria(electric, [forn_no_calenta], falta_potencia_electrica).
+avaria(electric, [forn_no_calenta, no_encen_panell_forn], font_alimentacio_defectuosa).
 
-avaria(ventilacio, [soroll_fort, no_ventila], motor_campana_danyat).
-avaria(ventilacio, [no_ventila], filtre_brut).
+avaria(gas, [no_encenen_fogons, pudor_gas, escoltar_xiulet], fuita_gas).
+avaria(gas, [no_encenen_fogons], falta_gas).
+avaria(gas, [no_encenen_fogons, flama_dispersa], fogons_taponats).
+avaria(gas, [flama_dispersa], xiclets_fogons_defectuosos).
 
-avaria(aigua, [no_hi_ha_aigua], aixeta_tancada).
-avaria(aigua, [fuites_aigua, no_hi_ha_aigua], canonada_danyada).
+avaria(mecanic, [no_encenen_fogons, no_regulen_fogons_be], panell_fogons_defectuos).
 
-avaria(gas, [fuites_gas], canonada_gas_danyada).
-avaria(gas, [no_gas], regulador_gas_danyat).
 
 
 
@@ -195,7 +197,7 @@ diagnostica_cotxe :-
 
 % Part de diagnòstic de cuines
 diagnostica_cuina :-
-  write("Introdueix el simptoma detectat (fuites_gas, fuites_aigua, no_gas, calor, soroll_fort, no_ventila, no_hi_ha_aigua, no_encen_foc) o 'sortir' per diagnosticar un aparell diferent (encara que sigui el mateix sistema):"), nl,
+  write("Introdueix el simptoma detectat (acumulacio_fum, no_encen_panell_forn, forn_no_calenta, salta_diferencial, no_encenen_fogons, pudor_gas, escoltar_xiulet, flama_dispersa, no_regulen_fogons_be) o 'sortir' per diagnosticar un aparell diferent (encara que sigui el mateix sistema):"), nl,
   read(Simptoma),
   ( Simptoma == sortir ->
       start;
