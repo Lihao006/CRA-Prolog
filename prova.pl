@@ -111,7 +111,7 @@ mes_obs(Causes, NovesCauses) :-
       read(NouSimptoma),
       % Utilitzem la funcio include que va incorporat en Prolog per filtrar la llista original de Causes en funcio del NouSimptoma introduit per lusuari.
       % Se li passa el patró te_aquest_simptoma(NouSimptoma), se li indica q ho ha de buscar en la llista Causes i es guarda en la nova llista NovesCausesSegonsNouSimptoma.
-      % Funciona te_aquest_simptoma(NouSimptoma) amb un sol arguement quan en teoria necessita dos pq es una funcio parcial(pot esperar a q li donin el segon argument)
+      % Funciona te_aquest_simptoma(NouSimptoma) amb un sol argument quan en teoria necessita dos pq es una funcio parcial(pot esperar a q li donin el segon argument)
       % La funcio include afegeix el segon argument a te_aquest_simptoma automaticament, q és cada un dels elements de la llista Causes
       % FInalment es crida recursivament per si lusuari vol seguir filtrant causes
       % Si retorna false és simplement que ha filtrat totes les causes i no queden cap :(
