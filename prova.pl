@@ -103,24 +103,31 @@ avaria(cuina_mecanic, [no_encenen_fogons, no_regulen_fogons_be], panell_fogons_d
 mes_obs(Causes, NovesCauses) :-
     write("Vols introduir mes observacions? (si/no)"), nl,
     read(Resposta1),
-    ( Resposta1 == no -> 
+    ( Resposta1 == sortir ->
+        start;
+      Resposta1 == no -> 
         NovesCauses = Causes;
       Resposta1 == si -> 
-      write("Si us plau, escriu el nou simptoma:"), nl,
-      write("NO INTRODUEIXI EL MATEIX SIMPTOMA DE NOU."), nl,
-      read(NouSimptoma),
-      % Utilitzem la funcio include que va incorporat en Prolog per filtrar la llista original de Causes en funcio del NouSimptoma introduit per lusuari.
-      % Se li passa el patró te_aquest_simptoma(NouSimptoma), se li indica q ho ha de buscar en la llista Causes i es guarda en la nova llista NovesCausesSegonsNouSimptoma.
-      % Funciona te_aquest_simptoma(NouSimptoma) amb un sol argument quan en teoria necessita dos pq es una funcio parcial(pot esperar a q li donin el segon argument)
-      % La funcio include afegeix el segon argument a te_aquest_simptoma automaticament, q és cada un dels elements de la llista Causes
-      % FInalment es crida recursivament per si lusuari vol seguir filtrant causes
-      % Si retorna false és simplement que ha filtrat totes les causes i no queden cap :(
-      include(te_aquest_simptoma(NouSimptoma), Causes, NovesCausesSegonsNouSimptoma),
-      ( NovesCausesSegonsNouSimptoma == [] -> 
-          (format("No s'ha trobat cap avaria amb aquest conjunt de simptomes.~n"), !);
-      printllista(NovesCausesSegonsNouSimptoma),
-      mes_obs(NovesCausesSegonsNouSimptoma, NovesCauses)
-    )
+        write("Si us plau, escriu el nou simptoma:"), nl,
+        write("NO INTRODUEIXI EL MATEIX SIMPTOMA DE NOU."), nl,
+        read(NouSimptoma),
+        ( NouSimptoma == sortir ->
+            start;
+
+        % Utilitzem la funcio include que va incorporat en Prolog per filtrar la llista original de Causes en funcio del NouSimptoma introduit per lusuari.
+        % Se li passa el patró te_aquest_simptoma(NouSimptoma), se li indica q ho ha de buscar en la llista Causes i es guarda en la nova llista NovesCausesSegonsNouSimptoma.
+        % Funciona te_aquest_simptoma(NouSimptoma) amb un sol argument quan en teoria necessita dos pq es una funcio parcial(pot esperar a q li donin el segon argument)
+        % La funcio include afegeix el segon argument a te_aquest_simptoma automaticament, q és cada un dels elements de la llista Causes
+        % FInalment es crida recursivament per si lusuari vol seguir filtrant causes
+        % Si retorna false és simplement que ha filtrat totes les causes i no queden cap :(
+          
+          include(te_aquest_simptoma(NouSimptoma), Causes, NovesCausesSegonsNouSimptoma),
+          ( NovesCausesSegonsNouSimptoma == [] -> 
+            (format("No s'ha trobat cap avaria amb aquest conjunt de simptomes.~n"), !);
+          printllista(NovesCausesSegonsNouSimptoma),
+          mes_obs(NovesCausesSegonsNouSimptoma, NovesCauses)
+          )
+        )
     ).
 
 % Funció per buscar coincidencies entre el NouSimptoma i la llista Simptomes de cada avaria(...)
@@ -149,7 +156,9 @@ pregunta_usuari([(Subsistema, Causa, _)|Altres]) :-
     ( Resposta == si ->
         format("La causa del problema es ~w en el subsistema ~w.~n", [Causa, Subsistema]);
       Resposta == no ->
-        pregunta_usuari(Altres)
+        pregunta_usuari(Altres);
+      Resposta == sortir ->
+      start
     ).
 
 % Dialeg amb usuari
