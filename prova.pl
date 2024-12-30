@@ -117,7 +117,7 @@ mes_obs(Causes, NovesCauses) :-
       % Si retorna false és simplement que ha filtrat totes les causes i no queden cap :(
       include(te_aquest_simptoma(NouSimptoma), Causes, NovesCausesSegonsNouSimptoma),
       ( NovesCausesSegonsNouSimptoma == [] -> 
-          format("Això no és possible.~n");
+          format("Aixo no es possible.~n");
       printllista(NovesCausesSegonsNouSimptoma),
       mes_obs(NovesCausesSegonsNouSimptoma, NovesCauses)
     )
