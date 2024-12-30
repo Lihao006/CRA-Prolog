@@ -117,7 +117,7 @@ mes_obs(Causes, NovesCauses) :-
       % Si retorna false és simplement que ha filtrat totes les causes i no queden cap :(
       include(te_aquest_simptoma(NouSimptoma), Causes, NovesCausesSegonsNouSimptoma),
       ( NovesCausesSegonsNouSimptoma == [] -> 
-          (format("No s'ha trobat cap avaria amb aquest conjunt de simptomes.~n"), start);
+          (format("No s'ha trobat cap avaria amb aquest conjunt de simptomes.~n"), !);
       printllista(NovesCausesSegonsNouSimptoma),
       mes_obs(NovesCausesSegonsNouSimptoma, NovesCauses)
     )
@@ -142,7 +142,7 @@ printllista([(Subsistema, Causa, _)|Altres], Simptoma) :-
 
 % Funció per preguntar a usuari si les causes filtrades que queden son correctes
 % Suposem que l usuari va a comprovar si els components dels subsistemes esmentades estan correctes o no
-pregunta_usuari([]) :- format("No s'ha pogut trobar l'avaria.~n"), start.
+pregunta_usuari([]) :- format("No s'ha pogut trobar l'avaria.~n"), !.
 pregunta_usuari([(Subsistema, Causa, _)|Altres]) :-
     format("Podries comprovar si hi ha ~w en el subsistema ~w? (si/no): ", [Causa, Subsistema]), nl,
     read(Resposta),
@@ -179,7 +179,7 @@ diagnostica_refrigerador :-
     printllista(Causes, Simptoma),
     mes_obs(Causes, NovesCauses),
     pregunta_usuari(NovesCauses),
-    diagnostica_refrigerador
+    !
   ).
 
 
@@ -193,7 +193,7 @@ diagnostica_cotxe :-
     printllista(Causes, Simptoma),
     mes_obs(Causes, NovesCauses),
     pregunta_usuari(NovesCauses),
-    diagnostica_cotxe
+    !
   ).
 
 
@@ -207,5 +207,5 @@ diagnostica_cuina :-
     printllista(Causes, Simptoma),
     mes_obs(Causes, NovesCauses),
     pregunta_usuari(NovesCauses),
-    diagnostica_cuina
+    !
   ).
