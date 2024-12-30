@@ -10,6 +10,7 @@ subsistema(cotxe, cotxe_encesa).
 subsistema(cotxe, cotxe_electric).
 subsistema(cotxe, cotxe_confort_interior).
 subsistema(cotxe, cotxe_motor).
+subsistema(cotxe, cotxe_fre).
 
 % Subsistemes de refrigerador
 subsistema(refrigerador, refrigerador_refrigerant).
