@@ -10,6 +10,7 @@ subsistema(cotxe, encesa).
 subsistema(cotxe, electric).
 subsistema(cotxe, confort_interior).
 subsistema(cotxe, motor).
+subsistema(cotxe, fre).
 
 % Subsistemes de refrigerador
 subsistema(refrigerador, refrigerant).
@@ -128,10 +129,10 @@ te_aquest_simptoma(NouSimptoma, (_, _, Simptomes)) :-
     member(NouSimptoma, Simptomes).
 
 % Funció per trobar totes les causes possibles del problema
-troba_causa(Simptoma, Causes) :-
+troba_causa(Sistema, Simptoma, Causes) :-
     % Aqui es busca en totes les avaria(...) coincidencies amb el Simptoma en la llista de Simptomes, 
     % anotem les dades Subsistema i Causa de les avaria(...) coincidents i es guarden en la llista Causes.
-    findall((Subsistema, Causa, Simptomes), (avaria(Subsistema, Simptomes, Causa), member(Simptoma, Simptomes)), Causes).
+    findall((Subsistema, Causa, Simptomes), (avaria(Subsistema, Simptomes, Causa), member(Simptoma, Simptomes), subsistema(Sistema, Subsistema)), Causes).
 
 % Funció per convertir la llista Causes en un seguit de frases.
 printllista([]).
@@ -174,7 +175,7 @@ diagnostica_refrigerador :-
   read(Simptoma),
   ( Simptoma == sortir -> 
       start;
-    troba_causa(Simptoma, Causes),
+    troba_causa(refrigerador, Simptoma, Causes),
     format("Les possibles causes de ~w son:~n", [Simptoma]),
     printllista(Causes),
     mes_obs(Causes, NovesCauses),
@@ -189,7 +190,7 @@ diagnostica_cotxe :-
   read(Simptoma),
   ( Simptoma == sortir ->
       start;
-    troba_causa(Simptoma, Causes),
+    troba_causa(cotxe, Simptoma, Causes),
     format("Les possibles causes de ~w son:~n", [Simptoma]),
     printllista(Causes),
     mes_obs(Causes, NovesCauses),
@@ -204,7 +205,7 @@ diagnostica_cuina :-
   read(Simptoma),
   ( Simptoma == sortir ->
       start;
-    troba_causa(Simptoma, Causes),
+    troba_causa(cuina, Simptoma, Causes),
     format("Les possibles causes per a ~w son:~n", [Simptoma]),
     printllista(Causes),
     mes_obs(Causes, NovesCauses),
