@@ -68,17 +68,17 @@ avaria(refrigerant, [no_refreda, fuita_gas, fuita_liquid], condensador_defectuos
 avaria(refrigerant, [no_refreda, fuita_gas, fuita_liquid], evaporador_defectuos).
 avaria(refrigerant, [no_refreda], valvula_expansio_defectuos).
 
-avaria(electric, [marca_malament_temperatura, no_encen_panell], panell_defectuós).
-avaria(electric, [marca_malament_temperatura, no_refreda, refreda_massa], termostat_defectuós).
+avaria(electric, [marca_malament_temperatura, no_encen_panell], panell_defectuos).
+avaria(electric, [marca_malament_temperatura, no_refreda, refreda_massa], termostat_defectuos).
 avaria(electric, [no_encen_llum], bombeta_fossa).
-avaria(electric, [no_refreda], ventilador_defectuós).
+avaria(electric, [no_refreda], ventilador_defectuos).
 avaria(electric, [no_refreda, no_encen_llum, no_encen_panell], falta_potencia_electrica).
 
-avaria(aillament, [no_refreda], aillament_termic_defectuós).
+avaria(aillament, [no_refreda], aillament_termic_defectuos).
 avaria(aillament, [no_tanca_be], juntes_porta_defectuoses).
 
-avaria(descongelacio, [acumulacio_gel], escalfador_defectuós).
-avaria(descongelacio, [surt_aigua], drenatge_defectuós).
+avaria(descongelacio, [acumulacio_gel], escalfador_defectuos).
+avaria(descongelacio, [surt_aigua], drenatge_defectuos).
 
 
 
