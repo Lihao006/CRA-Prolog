@@ -117,7 +117,7 @@ mes_obs(Causes, NovesCauses) :-
       % Si retorna false és simplement que ha filtrat totes les causes i no queden cap :(
       include(te_aquest_simptoma(NouSimptoma), Causes, NovesCausesSegonsNouSimptoma),
       ( NovesCausesSegonsNouSimptoma == [] -> 
-          format("Aixo no es possible.~n");
+          (format("No s'ha trobat cap avaria amb aquest conjunt de simptomes.~n"), start);
       printllista(NovesCausesSegonsNouSimptoma),
       mes_obs(NovesCausesSegonsNouSimptoma, NovesCauses)
     )
@@ -134,14 +134,15 @@ troba_causa(Sistema, Simptoma, Causes) :-
     findall((Subsistema, Causa, Simptomes), (avaria(Subsistema, Simptomes, Causa), member(Simptoma, Simptomes), subsistema(Sistema, Subsistema)), Causes).
 
 % Funció per convertir la llista Causes en un seguit de frases.
-printllista([]).
-printllista([(Subsistema, Causa, _)|Altres]) :-
+printllista([], _).
+printllista([(Subsistema, Causa, _)|Altres], Simptoma) :-
+    format("Les possibles causes de ~w son:~n", [Simptoma]),
     format("Possible subsistema afectat: ~w, possible avaria: ~w~n", [Subsistema, Causa]),
-    printllista(Altres).
+    printllista(Altres, Simptoma).
 
 % Funció per preguntar a usuari si les causes filtrades que queden son correctes
 % Suposem que l usuari va a comprovar si els components dels subsistemes esmentades estan correctes o no
-pregunta_usuari([]) :- format("No s'ha pogut trobar l'avaria.~n").
+pregunta_usuari([]) :- format("No s'ha pogut trobar l'avaria.~n"), start.
 pregunta_usuari([(Subsistema, Causa, _)|Altres]) :-
     format("Podries comprovar si hi ha ~w en el subsistema ~w? (si/no): ", [Causa, Subsistema]), nl,
     read(Resposta),
@@ -175,8 +176,7 @@ diagnostica_refrigerador :-
   ( Simptoma == sortir -> 
       start;
     troba_causa(refrigerador, Simptoma, Causes),
-    format("Les possibles causes de ~w son:~n", [Simptoma]),
-    printllista(Causes),
+    printllista(Causes, Simptoma),
     mes_obs(Causes, NovesCauses),
     pregunta_usuari(NovesCauses),
     diagnostica_refrigerador
@@ -190,8 +190,7 @@ diagnostica_cotxe :-
   ( Simptoma == sortir ->
       start;
     troba_causa(cotxe, Simptoma, Causes),
-    format("Les possibles causes de ~w son:~n", [Simptoma]),
-    printllista(Causes),
+    printllista(Causes, Simptoma),
     mes_obs(Causes, NovesCauses),
     pregunta_usuari(NovesCauses),
     diagnostica_cotxe
@@ -205,8 +204,7 @@ diagnostica_cuina :-
   ( Simptoma == sortir ->
       start;
     troba_causa(cuina, Simptoma, Causes),
-    format("Les possibles causes per a ~w son:~n", [Simptoma]),
-    printllista(Causes),
+    printllista(Causes, Simptoma),
     mes_obs(Causes, NovesCauses),
     pregunta_usuari(NovesCauses),
     diagnostica_cuina
