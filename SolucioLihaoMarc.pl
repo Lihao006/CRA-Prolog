@@ -86,7 +86,7 @@ avaria(refrigerador_descongelacio, [surt_aigua], drenatge_defectuos).
 % Avaries cuines
 avaria(cuina_electric, [acumulacio_fum], extractor_defectuos).
 avaria(cuina_electric, [no_encen_panell_forn, forn_no_calenta], panell_forn_defectuos).
-avaria(cuina_electric, [forn_no_calenta, salta_diferencial], resistencia_defectuos).
+avaria(cuina_electric, [forn_no_calenta, salta_diferencial], resistencia_defectuosa).
 avaria(cuina_electric, [forn_no_calenta], falta_potencia_electrica).
 avaria(cuina_electric, [forn_no_calenta, no_encen_panell_forn], font_alimentacio_defectuosa).
 
