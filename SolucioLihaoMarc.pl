@@ -183,14 +183,21 @@ start :-
 diagnostica_refrigerador :-
   write("Introdueix el simptoma detectat (no_refreda, soroll_fort, fuita_gas, fuita_liquid, marca_malament_temperatura, no_encen_panell, refreda_massa, no_encen_llum, no_tanca_be, acumulacio_gel, surt_aigua) o 'sortir' per diagnosticar un aparell diferent (encara que sigui el mateix sistema):"), nl,
   read(Simptoma),
-  ( Simptoma == sortir -> 
+  ( Simptoma == sortir ->
       start;
-    troba_causa(refrigerador, Simptoma, Causes),
-    format("Les possibles causes de ~w son:~n", [Simptoma]),
-    printllista(Causes),
-    mes_obs(Causes, NovesCauses),
-    pregunta_usuari(NovesCauses),
-    !
+    troba_causa(cotxe, Simptoma, Causes),
+    (
+      ( Causes == [] -> 
+          format("No s'ha pogut trobar l'avaria.~n"), !
+      );
+      (
+      format("Les possibles causes de ~w son:~n", [Simptoma]),
+      printllista(Causes),
+      mes_obs(Causes, NovesCauses),
+      pregunta_usuari(NovesCauses),
+      !
+      )
+    )
   ).
 
 
@@ -201,11 +208,18 @@ diagnostica_cotxe :-
   ( Simptoma == sortir ->
       start;
     troba_causa(cotxe, Simptoma, Causes),
-    format("Les possibles causes de ~w son:~n", [Simptoma]),
-    printllista(Causes),
-    mes_obs(Causes, NovesCauses),
-    pregunta_usuari(NovesCauses),
-    !
+    (
+      ( Causes == [] -> 
+          format("No s'ha pogut trobar l'avaria.~n"), !
+      );
+      (
+      format("Les possibles causes de ~w son:~n", [Simptoma]),
+      printllista(Causes),
+      mes_obs(Causes, NovesCauses),
+      pregunta_usuari(NovesCauses),
+      !
+      )
+    )
   ).
 
 
@@ -215,10 +229,17 @@ diagnostica_cuina :-
   read(Simptoma),
   ( Simptoma == sortir ->
       start;
-    troba_causa(cuina, Simptoma, Causes),
-    format("Les possibles causes de ~w son:~n", [Simptoma]),
-    printllista(Causes),
-    mes_obs(Causes, NovesCauses),
-    pregunta_usuari(NovesCauses),
-    !
+    troba_causa(cotxe, Simptoma, Causes),
+    (
+      ( Causes == [] -> 
+          format("No s'ha pogut trobar l'avaria.~n"), !
+      );
+      (
+      format("Les possibles causes de ~w son:~n", [Simptoma]),
+      printllista(Causes),
+      mes_obs(Causes, NovesCauses),
+      pregunta_usuari(NovesCauses),
+      !
+      )
+    )
   ).
