@@ -185,7 +185,7 @@ diagnostica_refrigerador :-
   read(Simptoma),
   ( Simptoma == sortir ->
       start;
-    troba_causa(cotxe, Simptoma, Causes),
+    troba_causa(refrigerador, Simptoma, Causes),
     (
       ( Causes == [] -> 
           format("No s'ha pogut trobar l'avaria.~n"), !
@@ -229,7 +229,7 @@ diagnostica_cuina :-
   read(Simptoma),
   ( Simptoma == sortir ->
       start;
-    troba_causa(cotxe, Simptoma, Causes),
+    troba_causa(cuina, Simptoma, Causes),
     (
       ( Causes == [] -> 
           format("No s'ha pogut trobar l'avaria.~n"), !
